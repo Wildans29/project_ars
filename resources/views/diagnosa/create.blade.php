@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.master')
 
 @section('pagetitle')
     Mulai Diagnosa
@@ -44,18 +44,18 @@
                             </div>
                         </div>
                     </div>
-                </form>
-            </div>
-            <div class="box-footer">
-                <a href="{{ route('diagnosa') }}" class="btn btn-danger"><i class="fa fa-times"></i> Batal</a>
-                <button type="button" onclick="return confirmAndSubmit()" class="btn btn-success" id="btnSave"><i
-                            class="fa fa-save"></i> Simpan
-                </button>
-            </div>
+                </div>
+                <div class="box-footer">
+                    <a href="{{ route('diagnosa') }}" class="btn btn-danger"><i class="fa fa-times"></i> Batal</a>
+                    <button type="submit" class="btn btn-success" id="btnSave"><i
+                        class="fa fa-save"></i> Simpan
+                    </button>
+                </div>
+            </form>
         </div>
     </section>
 @endsection
-@section('js')
+{{-- @section('js')
     <script>
         function confirmAndSubmit() {
             var form = $("#form-ski")[0];
@@ -67,4 +67,4 @@
             return false;
         }
     </script>
-@endsection
+@endsection --}}

@@ -42,8 +42,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'level:1'], function () {
         Route::prefix('kategori')->name('kategori.')->group(function () {
             // Route::get('/data', [KategoriController::class, 'data'])->name('data');
+            Route::get('/', [KategoriController::class, 'index'])->name('index');
             Route::get('/data', [KategoriController::class, 'data'])->name('data');
-            Route::resource('/', KategoriController::class);
+            Route::get('/store', [KategoriController::class, 'store'])->name('store');
+            Route::get('/edit/{id}', [KategoriController::class, 'edit'])->name('edit');
+            // Route::resource('/', KategoriController::class);
         });
 
         Route::prefix('produk')->name('produk.')->group(function () {
@@ -158,20 +161,21 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/berhasil', [PelangganController::class, 'berhasil'])->name('berhasil');
             Route::get('/success', [PelangganController::class, 'berhasil'])->name('success');
 
-            Route::prefix('konsultasi')->name('konsultasi.')->group(function () {
-                Route::get('/', [KerusakanController::class, 'index'])->name('index');
-                Route::post('/submit', [KerusakanController::class, 'submit'])->name('submit');
-            });
+            // Route::prefix('konsultasi')->name('konsultasi.')->group(function () {
+            //     Route::get('/', [KerusakanController::class, 'index'])->name('index');
+            //     Route::post('/submit', [KerusakanController::class, 'submit'])->name('submit');
+            // });
         });
 
-        // Route::prefix('diagnosa')->group(function() {
-        //     Route::get('new', [DiagnosaController::class, 'index'])->name('diagnosa');
-        //     Route::get('create', [DiagnosaController::class, 'create'])->name('diagnosa.create');
-        //     Route::post('', [DiagnosaController::class, 'store'])->name('diagnosa.store');        
-        //     Route::get('first/{id}', [DiagnosaController::class, 'firstQuestion'])->name('diagnosa.first');
-        //     Route::get('pertanyaan/{id}/diagnosa/{pertanyaanId}/{isTrue}', [DiagnosaController::class, 'executeQuestion'])->name('diagnosa.question');
-        //     Route::get('result/{id}/view', [DiagnosaController::class, 'result'])->name('diagnosa.result');
-        //     Route::get('diagnosa/search', [DiagnosaController::class, 'search'])->name('diagnosa.search');
-        // });        
+        Route::prefix('diagnosa')->group(function() {
+            Route::get('new', [DiagnosaController::class, 'index'])->name('diagnosa');
+            Route::get('create', [DiagnosaController::class, 'firstQuestion'])->name('diagnosa.create');
+            Route::post('store', [DiagnosaController::class, 'store'])->name('diagnosa.store');        
+            Route::get('first/{id}', [DiagnosaController::class, 'firstQuestion'])->name('diagnosa.first');
+            Route::get('pertanyaan/{id}/diagnosa/{pertanyaanId}/{isTrue}', [DiagnosaController::class, 'executeQuestion'])->name('diagnosa.question');
+            Route::get('result/{id}/view', [DiagnosaController::class, 'result'])->name('diagnosa.result');
+            Route::get('diagnosa/search', [DiagnosaController::class, 'search'])->name('diagnosa.search');
+        });        
+
     });
 });

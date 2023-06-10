@@ -76,6 +76,7 @@
     }
 
     function editForm(url) {
+        console.log(url);
         $('#modal-form').modal('show');
         $('#modal-form .modal-title').text('Edit Kategori');
 

@@ -1,14 +1,13 @@
 <?php
 
-
 namespace App\Http\Controllers;
-
 
 use App\models\Gejala;
 use App\models\Diagnosa;
 use App\models\Kerusakan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Auth;
 
 class DiagnosaController extends Controller
 {
@@ -24,10 +23,10 @@ class DiagnosaController extends Controller
     /**
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create()
-    {
-        return view('diagnosa/create');
-    }
+    // public function create()
+    // {
+    //     return view('diagnosa/create');
+    // }
 
     /**
      * @param Request $request
@@ -39,6 +38,7 @@ class DiagnosaController extends Controller
             'nama' => 'required',
             'motor' => 'required',
         ]);
+        // return $request;
 
         try {
             $data = [
@@ -53,10 +53,11 @@ class DiagnosaController extends Controller
         }
     }
 
-    public function firstQuestion($id)
+    public function firstQuestion()
     {
         $data = Gejala::where('is_first', 1)->first();
-        $data["diagnosaId"] = $id;
+        $data["diagnosaId"] = Auth::user()->id;
+        // return $data;
         return view('diagnosa/question', compact("data"));
     }
 

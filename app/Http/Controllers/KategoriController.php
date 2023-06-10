@@ -27,15 +27,14 @@ class KategoriController extends Controller
             ->addColumn('aksi', function ($kategori) {
                 return '
                 <div class="btn-group">
-                    <button onclick="editForm(`'. route('kategori.update', $kategori->id_kategori) .'`)" class="btn btn-xs btn-info btn-flat"><i class="fa fa-pencil"></i></button>
-                    <button onclick="deleteData(`'. route('kategori.destroy', $kategori->id_kategori) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
-                </div>
-                ';
+                    <button onclick="editForm(`'. url('kategoriedit/'.$kategori->id_kategori) .'`)" class="btn btn-xs btn-info btn-flat"><i class="fa fa-pencil"></i></button>
+                    </div>
+                    <button onclick="deleteData(`'. url('kategori/destroy/'. $kategori->id_kategori) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
+                    ';
             })
             ->rawColumns(['aksi'])
             ->make(true);
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -82,7 +81,10 @@ class KategoriController extends Controller
      */
     public function edit($id)
     {
-        //
+        $kategori = Kategori::find($id);
+
+        return response()->json($kategori);
+
     }
 
     /**

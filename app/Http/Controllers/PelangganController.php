@@ -8,8 +8,6 @@ use App\Models\Diagnosa;
 use App\Models\Gejala;
 use App\Models\Kerusakan;
 
-
-
 class PelangganController extends Controller
 {
     public function __construct()
@@ -23,18 +21,15 @@ class PelangganController extends Controller
     }
 
     public function riwayatKonsultasi()
-{
+    {
     $riwayatKonsultasi = RiwayatKonsultasi::where('user_id', auth()->user()->id)->get();
     
     return view('pelanggan.riwayatKonsultasi', compact('riwayatKonsultasi'));
-}
-
+    }
 
     public function konsultasi()
-    {
-        
-        return view ('pelanggan.konsultasi');  
-         
+    { 
+        return view ('diagnosa.index');      
     }
 
     public function berhasil()
