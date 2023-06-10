@@ -11,12 +11,6 @@ use Carbon\Carbon;
 class BookingController extends Controller
 {
 
-    public function showBookingForm()
-    {
-        $motors = Motor::all();
-        return view('pelanggan.booking', ['motors' => $motors]);
-    }
-
     public function submit(Request $request)
     {
         // Ambil nilai-nilai yang dikirimkan melalui formulir
@@ -53,7 +47,7 @@ class BookingController extends Controller
         Session::put('booking', $booking);
     
         // Redirect ke halaman berhasil
-        return redirect()->route('booking.success');
+        return redirect()->route('pelanggan.berhasil');
     }
     
 
@@ -75,12 +69,30 @@ class BookingController extends Controller
 
     public function isServiceTimeValid($tanggal, $waktu)
     {
-        $serviceDateTime = Carbon::createFromFormat('Y-m-d H:i', $tanggal . ' ' . $waktu);
+        $serviceDateTime = Carbon::createFromFormat('Y-m-d H:i:s', $tanggal . ' ' . $waktu);
         $currentDateTime = Carbon::now();
-
-        return $serviceDateTime > $currentDateTime;
+    
+        return $serviceDateTime->greaterThan($currentDateTime);
     }
-
+    public function updateServiceStatus($id)
+    {
+        // Temukan booking berdasarkan ID
+        $booking = Booking::find($id);
+    
+        if (!$booking) {
+            // Jika booking tidak ditemukan, berikan respon atau tangani sesuai kebutuhan
+            return response()->json(['message' => 'Booking not found'], 404);
+        }
+    
+        // Perbarui status service menjadi true (sudah service)
+        $booking->status_service = true;
+        $booking->save();
+    
+        // Berikan respon berhasil atau tangani sesuai kebutuhan
+        return response()->json(['message' => 'Service status updated successfully'], 200);
+    }
+    
+    
     public function showStatus()
     {
 

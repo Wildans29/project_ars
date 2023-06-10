@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kategori;
-use App\Models\Member;
 use App\Models\Pembelian;
 use App\Models\Pengeluaran;
 use App\Models\Penjualan;
@@ -18,7 +17,7 @@ class DashboardController extends Controller
     $kategori = Kategori::count();
     $produk = Produk::count();
     $supplier = Supplier::count();
-    $member = Member::count();
+
     
     $tanggal_awal = date('Y-m-01');
     $tanggal_akhir = date('Y-m-d');
@@ -40,7 +39,7 @@ class DashboardController extends Controller
     }
 
     if (auth()->user()->level == 1) {
-        return view('admin.dashboard', compact('kategori', 'produk', 'supplier', 'member', 'tanggal_awal', 'tanggal_akhir', 'data_tanggal', 'data_pendapatan'));
+        return view('admin.dashboard', compact('kategori', 'produk', 'supplier' , 'tanggal_awal', 'tanggal_akhir', 'data_tanggal', 'data_pendapatan'));
     } elseif (auth()->user()->level == 2) {
             // Pengguna dengan level 2 (pelanggan) diarahkan ke dashboard pelanggan
             return view('pelanggan.dashboard');

@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\riwayatKonsultasi;
+use App\Models\Diagnosa;
+use App\Models\Gejala;
+use App\Models\Kerusakan;
+
+
 
 class PelangganController extends Controller
 {
@@ -17,13 +23,18 @@ class PelangganController extends Controller
     }
 
     public function riwayatKonsultasi()
-    {
-        return view ('pelanggan.riwayatKonsultasi');
-        }
+{
+    $riwayatKonsultasi = RiwayatKonsultasi::where('user_id', auth()->user()->id)->get();
+    
+    return view('pelanggan.riwayatKonsultasi', compact('riwayatKonsultasi'));
+}
+
 
     public function konsultasi()
     {
-        return view ('pelanggan.konsultasi');   
+        
+        return view ('pelanggan.konsultasi');  
+         
     }
 
     public function berhasil()

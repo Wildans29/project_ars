@@ -18,7 +18,7 @@ class PenjualanController extends Controller
 
     public function data()
     {
-        $penjualan = Penjualan::with('member')->orderBy('id_penjualan', 'desc')->get();
+        $penjualan = Penjualan::orderBy('id_penjualan', 'desc')->get();
 
         return datatables()
             ->of($penjualan)
@@ -35,10 +35,6 @@ class PenjualanController extends Controller
             ->addColumn('tanggal', function ($penjualan) {
                 return tanggal_indonesia($penjualan->created_at, false);
             })
-            ->addColumn('kode_member', function ($penjualan) {
-                $member = $penjualan->member->kode_member ?? '';
-                return '<span class="label label-success">'. $member .'</spa>';
-            })
             ->editColumn('diskon', function ($penjualan) {
                 return $penjualan->diskon . '%';
             })
@@ -53,14 +49,14 @@ class PenjualanController extends Controller
                 </div>
                 ';
             })
-            ->rawColumns(['aksi', 'kode_member'])
+            ->rawColumns(['aksi'])
             ->make(true);
     }
+
 
     public function create()
     {
         $penjualan = new Penjualan();
-        $penjualan->id_member = null;
         $penjualan->total_item = 0;
         $penjualan->total_harga = 0;
         $penjualan->diskon = 0;
@@ -74,28 +70,35 @@ class PenjualanController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $penjualan = Penjualan::findOrFail($request->id_penjualan);
-        $penjualan->id_member = $request->id_member;
-        $penjualan->total_item = $request->total_item;
-        $penjualan->total_harga = $request->total;
+{
+    $penjualan = Penjualan::findOrFail($request->id_penjualan);
+    $penjualan->total_item = $request->total_item;
+    $penjualan->total_harga = $request->total;
+    
+    // Periksa apakah $request->diskon tidak null sebelum mengatur nilainya
+    if (!is_null($request->diskon)) {
         $penjualan->diskon = $request->diskon;
-        $penjualan->bayar = $request->bayar;
-        $penjualan->diterima = $request->diterima;
-        $penjualan->update();
-
-        $detail = PenjualanDetail::where('id_penjualan', $penjualan->id_penjualan)->get();
-        foreach ($detail as $item) {
-            $item->diskon = $request->diskon;
-            $item->update();
-
-            $produk = Produk::find($item->id_produk);
-            $produk->stok -= $item->jumlah;
-            $produk->update();
-        }
-
-        return redirect()->route('transaksi.selesai');
     }
+    
+    $penjualan->bayar = $request->bayar;
+    $penjualan->diterima = $request->diterima;
+    $penjualan->update();
+
+    $detail = PenjualanDetail::where('id_penjualan', $penjualan->id_penjualan)->get();
+    foreach ($detail as $item) {
+        // Periksa apakah $request->diskon tidak null sebelum mengatur nilainya
+        if (!is_null($request->diskon)) {
+            $item->diskon = $request->diskon;
+        }
+        $item->update();
+
+        $produk = Produk::find($item->id_produk);
+        $produk->stok -= $item->jumlah;
+        $produk->update();
+    }
+
+    return redirect()->route('transaksi.selesai');
+}
 
     public function show($id)
     {

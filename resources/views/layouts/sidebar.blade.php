@@ -35,11 +35,6 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('member.index') }}">
-                    <i class="fa fa-id-card"></i> <span>Member</span>
-                </a>
-            </li>
-            <li>
                 <a href="{{ route('supplier.index') }}">
                     <i class="fa fa-truck"></i> <span>Supplier</span>
                 </a>
@@ -70,6 +65,18 @@
                     <i class="fa fa-cart-arrow-down"></i> <span>Transaksi Baru</span>
                 </a>
             </li>
+            <li class="header">Data sistem pakar</li>
+            <li>
+                <a href="{{ route('gejala.index') }}">
+                    <i class="fa fa-book"></i> <span>Gejala</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('kerusakan.index') }}">
+                    <i class="fa fa-exclamation-triangle"></i> <span>Kerusakan</span>
+                </a>
+            </li>
+            <li>
             <li class="header">REPORT</li>
             <li>
                 <a href="{{ route('laporan.index') }}">
@@ -88,26 +95,16 @@
                 </a>
             </li>
 
-            <li>
-                <a href="{{ route('transaksi.index') }}">
-                    <i class="fa fa-cart-arrow-down"></i> <span>Transaksi Aktif</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('transaksi.baru') }}">
-                    <i class="fa fa-cart-arrow-down"></i> <span>Transaksi Baru</span>
-                </a>
-            </li>
             
             @elseif (auth()->user()->level == 2)
             <!-- Menu items for level 2 user -->
             <li>
-                <a href="{{ route('pelanggan.status') }}">
+                <a href="{{ url('/booking/pelanggan/status') }}">
                     <i class="fa fa-cart-arrow-down"></i> <span>Status Booking</span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('pelanggan.riwayatKonsultasi') }}">
+                <a href="{{ url('/pelanggan/riwayatKonsultasi') }}">
                     <i class="fa fa-bicycle"></i> <span>Riwayat Konsultasi</span>
                 </a>
             </li>

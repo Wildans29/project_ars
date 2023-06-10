@@ -40,10 +40,6 @@
             <td>Tanggal</td>
             <td>: {{ tanggal_indonesia(date('Y-m-d')) }}</td>
         </tr>
-        <tr>
-            <td>Kode Member</td>
-            <td>: {{ $penjualan->member->kode_member ?? '' }}</td>
-        </tr>
     </table>
 
     <table class="data" width="100%">

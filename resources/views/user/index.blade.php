@@ -14,7 +14,9 @@
     <div class="col-lg-12">
         <div class="box">
             <div class="box-header with-border">
-                <button onclick="addForm('{{ route('user.store') }}')" class="btn btn-success btn-xs btn-flat"><i class="fa fa-plus-circle"></i> Tambah</button>
+                @if(auth()->user()->level == 1)
+                    <button onclick="addForm('{{ route('user.store') }}')" class="btn btn-success btn-xs btn-flat"><i class="fa fa-plus-circle"></i> Tambah</button>
+                @endif
             </div>
             <div class="box-body table-responsive">
                 <table class="table table-stiped table-bordered">
@@ -22,7 +24,9 @@
                         <th width="5%">No</th>
                         <th>Nama</th>
                         <th>Email</th>
-                        <th width="15%"><i class="fa fa-cog"></i></th>
+                        @if(auth()->user()->level == 1)
+                            <th width="15%"><i class="fa fa-cog"></i></th>
+                        @endif
                     </thead>
                 </table>
             </div>
@@ -48,12 +52,14 @@
                 {data: 'DT_RowIndex', searchable: false, sortable: false},
                 {data: 'name'},
                 {data: 'email'},
-                {data: 'aksi', searchable: false, sortable: false},
+                @if(auth()->user()->level == 1)
+                    {data: 'aksi', searchable: false, sortable: false},
+                @endif
             ]
         });
 
         $('#modal-form').validator().on('submit', function (e) {
-            if (! e.preventDefault()) {
+            if (!e.isDefaultPrevented()) {
                 $.post($('#modal-form form').attr('action'), $('#modal-form form').serialize())
                     .done((response) => {
                         $('#modal-form').modal('hide');
@@ -61,7 +67,6 @@
                     })
                     .fail((errors) => {
                         alert('Tidak dapat menyimpan data');
-                        return;
                     });
             }
         });
@@ -96,8 +101,8 @@
                 $('#modal-form [name=email]').val(response.email);
             })
             .fail((errors) => {
+                console.log(errors);
                 alert('Tidak dapat menampilkan data');
-                return;
             });
     }
 
@@ -112,7 +117,6 @@
                 })
                 .fail((errors) => {
                     alert('Tidak dapat menghapus data');
-                    return;
                 });
         }
     }
