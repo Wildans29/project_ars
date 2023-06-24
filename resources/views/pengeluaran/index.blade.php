@@ -14,10 +14,17 @@
     <div class="col-lg-12">
         <div class="box">
             <div class="box-header with-border">
+<<<<<<< HEAD
                 <button onclick="addForm('{{ url('pengeluaran/store/') }}')" class="btn btn-success btn-xs btn-flat"><i class="fa fa-plus-circle"></i> Tambah</button>
             </div>
             <div class="box-body table-responsive">
                 <table class="table table-striped table-bordered">
+=======
+                <button onclick="addForm('{{ route('pengeluaran.store') }}')" class="btn btn-success btn-xs btn-flat"><i class="fa fa-plus-circle"></i> Tambah</button>
+            </div>
+            <div class="box-body table-responsive">
+                <table class="table table-stiped table-bordered">
+>>>>>>> d8e6ef8e3245eebed6ae2ce463295b0119af4271
                     <thead>
                         <th width="5%">No</th>
                         <th>Tanggal</th>
@@ -80,7 +87,6 @@
     }
 
     function editForm(url) {
-
         $('#modal-form').modal('show');
         $('#modal-form .modal-title').text('Edit Pengeluaran');
 
@@ -116,6 +122,5 @@
                 });
         }
     }
-
 </script>
 @endpush

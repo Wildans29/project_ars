@@ -26,4 +26,4 @@
         <!-- /.box-footer-->
     </div>
     <!-- /.box -->
-@endsection
+

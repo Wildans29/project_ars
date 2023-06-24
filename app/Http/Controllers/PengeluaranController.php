@@ -7,11 +7,14 @@ use App\Models\Pengeluaran;
 
 class PengeluaranController extends Controller
 {
+<<<<<<< HEAD
      /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+=======
+>>>>>>> d8e6ef8e3245eebed6ae2ce463295b0119af4271
     public function index()
     {
         return view('pengeluaran.index');
@@ -33,8 +36,13 @@ class PengeluaranController extends Controller
             ->addColumn('aksi', function ($pengeluaran) {
                 return '
                 <div class="btn-group">
+<<<<<<< HEAD
                     <button onclick="editForm(`'. url('pengeluaran/edit',$pengeluaran->id_pengeluaran) .'`)" class="btn btn-xs btn-info btn-flat"><i class="fa fa-pencil"></i></button>
                     <button onclick="deleteData(`'. url('pengeluaran/destroy', $pengeluaran->id_pengeluaran) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
+=======
+                    <button type="button" onclick="editForm(`'. route('pengeluaran.update', $pengeluaran->id_pengeluaran) .'`)" class="btn btn-xs btn-info btn-flat"><i class="fa fa-pencil"></i></button>
+                    <button type="button" onclick="deleteData(`'. route('pengeluaran.destroy', $pengeluaran->id_pengeluaran) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
+>>>>>>> d8e6ef8e3245eebed6ae2ce463295b0119af4271
                 </div>
                 ';
             })
@@ -86,9 +94,13 @@ class PengeluaranController extends Controller
      */
     public function edit($id)
     {
+<<<<<<< HEAD
         $pengeluaran = Pengeluaran::find($id);
 
         return response()->json($pengeluaran);
+=======
+        //
+>>>>>>> d8e6ef8e3245eebed6ae2ce463295b0119af4271
     }
 
     /**
@@ -100,9 +112,14 @@ class PengeluaranController extends Controller
      */
     public function update(Request $request, $id)
     {
+<<<<<<< HEAD
         $pengeluaran = Pengeluaran::find($id); 
         $pengeluaran->update($request->all());
         
+=======
+        $pengeluaran = Pengeluaran::find($id)->update($request->all());
+
+>>>>>>> d8e6ef8e3245eebed6ae2ce463295b0119af4271
         return response()->json('Data berhasil disimpan', 200);
     }
 
@@ -114,9 +131,15 @@ class PengeluaranController extends Controller
      */
     public function destroy($id)
     {
+<<<<<<< HEAD
         $pengeluaran = Pengeluaran::find($id);
         $pengeluaran->delete();
 
         return response()->noContent();
+=======
+        $pengeluaran = Pengeluaran::find($id)->delete();
+
+        return response(null, 204);
+>>>>>>> d8e6ef8e3245eebed6ae2ce463295b0119af4271
     }
 }

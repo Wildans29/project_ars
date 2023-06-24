@@ -7,15 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Gejala extends Model
 {
     protected $table = 'gejala';
-    protected $fillable = ['kode_gejala', 'pertanyaan', 'solusi', 'is_first'];
 
-    public function aturan()
-    {
-        return $this->hasMany(Aturan::class, 'kode_gejala', 'kode_gejala');
+    protected $guarded = ['id', 'created_at', 'updated_at'];
+
+    public function penyakit() {
+    	return $this->belongsToMany('App\Models\Penyakit', 'aturan');
     }
 
-    public function diagnosas()
-    {
-        return $this->hasMany(Diagnosa::class, 'gejala', 'id');
+    public function pasien() {
+    	return $this->belongsToMany('App\Models\Pasien', 'tmp_gejala');
     }
 }

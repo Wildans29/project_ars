@@ -1,5 +1,6 @@
 <?php
 
+<<<<<<< HEAD
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
@@ -7,16 +8,33 @@ use App\Models\Aturan;
 use App\Models\Gejala;
 use App\Models\Kerusakan;
 use App\Models\Diagnosa;
+=======
+
+namespace App\Http\Controllers;
+
+
+use App\Http\Controllers\Controller;
+use App\Models\Kerusakan;
+>>>>>>> d8e6ef8e3245eebed6ae2ce463295b0119af4271
 use Illuminate\Support\Facades\DB;
 
 class KerusakanController extends Controller
 {
     public function index()
+<<<<<<< HEAD
     {
         $kerusakan = Kerusakan::all();
 
         return view('master.kerusakan.index', compact('kerusakan'));
     }
+=======
+{
+    $kerusakan = Kerusakan::all(); // Mengambil semua data kerusakan dari model
+
+    return view('master.kerusakan.index', compact('kerusakan'));
+}
+
+>>>>>>> d8e6ef8e3245eebed6ae2ce463295b0119af4271
 
     public function search()
     {
@@ -26,6 +44,7 @@ class KerusakanController extends Controller
             var_dump($e->getMessage());
         }
     }
+<<<<<<< HEAD
     
     public function create()
     {
@@ -85,4 +104,6 @@ class KerusakanController extends Controller
 
         return redirect()->route('kerusakan.index')->with('success', 'Kerusakan berhasil dihapus');
     }
+=======
+>>>>>>> d8e6ef8e3245eebed6ae2ce463295b0119af4271
 }
