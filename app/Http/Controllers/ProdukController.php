@@ -51,11 +51,7 @@ class ProdukController extends Controller
             ->addColumn('aksi', function ($produk) {
                 return '
                 <div class="btn-group">
-<<<<<<< HEAD
                     <button type="button" onclick="editForm(`'. route('produk.edit', $produk->id_produk) .'`)" class="btn btn-xs btn-info btn-flat"><i class="fa fa-pencil"></i></button>
-=======
-                    <button type="button" onclick="editForm(`'. route('produk.update', $produk->id_produk) .'`)" class="btn btn-xs btn-info btn-flat"><i class="fa fa-pencil"></i></button>
->>>>>>> d8e6ef8e3245eebed6ae2ce463295b0119af4271
                     <button type="button" onclick="deleteData(`'. route('produk.destroy', $produk->id_produk) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
                 </div>
                 ';
@@ -64,10 +60,6 @@ class ProdukController extends Controller
             ->make(true);
     }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> d8e6ef8e3245eebed6ae2ce463295b0119af4271
     /**
      * Show the form for creating a new resource.
      *
@@ -115,13 +107,9 @@ class ProdukController extends Controller
      */
     public function edit($id)
     {
-<<<<<<< HEAD
         $produk = Produk::findOrFail($id);
 
         return response()->json($produk);
-=======
-        //
->>>>>>> d8e6ef8e3245eebed6ae2ce463295b0119af4271
     }
 
     /**
@@ -134,19 +122,11 @@ class ProdukController extends Controller
     public function update(Request $request, $id)
     {
         $produk = Produk::find($id);
-<<<<<<< HEAD
         $produk->fill($request->all())->save();
-=======
-        $produk->update($request->all());
->>>>>>> d8e6ef8e3245eebed6ae2ce463295b0119af4271
 
         return response()->json('Data berhasil disimpan', 200);
     }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> d8e6ef8e3245eebed6ae2ce463295b0119af4271
     /**
      * Remove the specified resource from storage.
      *

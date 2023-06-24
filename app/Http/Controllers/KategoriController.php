@@ -27,18 +27,11 @@ class KategoriController extends Controller
             ->addColumn('aksi', function ($kategori) {
                 return '
                 <div class="btn-group">
-<<<<<<< HEAD
                     <button onclick="editForm(`'. url('kategori/edit/'.$kategori->id_kategori) .'`)" class="btn btn-xs btn-info btn-flat"><i class="fa fa-pencil"></i></button>
                     <button onclick="deleteData(`'. url('kategori/destroy/'. $kategori->id_kategori) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
                     </div>
                     ';                    
                     // <button onclick="editForm(`'. url('kategori/edit/'.$kategori->id_kategori) .'`)" class="btn btn-xs btn-info btn-flat"><i class="fa fa-pencil"></i></button>
-=======
-                    <button onclick="editForm(`'. url('kategoriedit/'.$kategori->id_kategori) .'`)" class="btn btn-xs btn-info btn-flat"><i class="fa fa-pencil"></i></button>
-                    </div>
-                    <button onclick="deleteData(`'. url('kategori/destroy/'. $kategori->id_kategori) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
-                    ';
->>>>>>> d8e6ef8e3245eebed6ae2ce463295b0119af4271
             })
             ->rawColumns(['aksi'])
             ->make(true);
@@ -90,17 +83,10 @@ class KategoriController extends Controller
     public function edit($id)
     {
         $kategori = Kategori::find($id);
-<<<<<<< HEAD
         
         return response()->json($kategori);
     }
 
-=======
-
-        return response()->json($kategori);
-
-    }
->>>>>>> d8e6ef8e3245eebed6ae2ce463295b0119af4271
 
     /**
      * Update the specified resource in storage.
@@ -111,7 +97,6 @@ class KategoriController extends Controller
      */
     public function update(Request $request, $id)
     {
-<<<<<<< HEAD
         // return $request;
         $kategori = Kategori::find($id);
         $kategori->nama_kategori = $request->nama_kategori;
@@ -120,15 +105,6 @@ class KategoriController extends Controller
     }
 
 
-=======
-        $kategori = Kategori::find($id);
-        $kategori->nama_kategori = $request->nama_kategori;
-        $kategori->update();
-
-        return response()->json('Data berhasil disimpan', 200);
-    }
-
->>>>>>> d8e6ef8e3245eebed6ae2ce463295b0119af4271
     /**
      * Remove the specified resource from storage.
      *

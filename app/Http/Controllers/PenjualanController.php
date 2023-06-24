@@ -102,10 +102,7 @@ class PenjualanController extends Controller
 
     public function show($id)
     {
-<<<<<<< HEAD
         // return
-=======
->>>>>>> d8e6ef8e3245eebed6ae2ce463295b0119af4271
         $detail = PenjualanDetail::with('produk')->where('id_penjualan', $id)->get();
 
         return datatables()

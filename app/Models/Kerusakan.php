@@ -13,4 +13,4 @@ class Kerusakan extends Model
     {
         return $this->hasMany(Aturan::class, 'kode_kerusakan', 'kode_gejala');
     }
-
+}

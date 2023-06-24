@@ -82,15 +82,15 @@ class Diagnosa extends Model
         // return true;
     }
 
-    // public function getNextGejala()
-    // {
+    public function getNextGejala()
+    {
 
-    //    // Explode gejala dalam table diagnosa dari separated comma ke array
-    //     $gejala = explode(",", $this->gejala);
+       // Explode gejala dalam table diagnosa dari separated comma ke array
+        $gejala = explode(",", $this->gejala);
     
-    //    // Ambil pertanyaan berikutnya
-    //     $nextGejala = Gejala::whereNotIn('id', $gejala)->orderBy('id')->first();
+       // Ambil pertanyaan berikutnya
+        $nextGejala = Gejala::whereNotIn('id', $gejala)->orderBy('id')->first();
 
-    //     return $nextGejala;
-    // }
+        return $nextGejala;
+    }
 }

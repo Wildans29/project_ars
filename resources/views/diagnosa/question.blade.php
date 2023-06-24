@@ -20,10 +20,10 @@
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
-            <a href="{{ route('diagnosa.question', ['id' => $data->diagnosaId, 'pertanyaanId' => $data->kode_gejala, 'isTrue' => 0]) }}" class="btn btn-danger">Tidak</a>
-            <a href="{{ route('diagnosa.question', ['id' => $data->diagnosaId, 'pertanyaanId' => $data->kode_gejala, 'isTrue' => 1]) }}" class="btn btn-success">Ya</a>
+            <a href="{{ route('diagnosa.question', ['id' => $data->diagnosaId, 'pertanyaanId' => $data->id, 'isTrue' => 0]) }}" class="btn btn-danger">Tidak</a>
+            <a href="{{ route('diagnosa.question', ['id' => $data->diagnosaId, 'pertanyaanId' => $data->id, 'isTrue' => 1]) }}" class="btn btn-success pull-right">Ya</a>
         </div>
         <!-- /.box-footer-->
     </div>
     <!-- /.box -->
-
+@endsection

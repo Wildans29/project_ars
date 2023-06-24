@@ -19,12 +19,7 @@ class PembelianController extends Controller
 
     public function data()
     {
-<<<<<<< HEAD
         $pembelian = Pembelian::orderBy('id_pembelian', 'desc')->with('supplier')->get();
-=======
-        $pembelian = Pembelian::orderBy('id_pembelian', 'desc')->get();
-
->>>>>>> d8e6ef8e3245eebed6ae2ce463295b0119af4271
         return datatables()
             ->of($pembelian)
             ->addIndexColumn()
@@ -49,13 +44,8 @@ class PembelianController extends Controller
             ->addColumn('aksi', function ($pembelian) {
                 return '
                 <div class="btn-group">
-<<<<<<< HEAD
                     <button onclick="showDetail(`'. url('pembelian.edit', $pembelian->id_pembelian) .'`)" class="btn btn-xs btn-info btn-flat"><i class="fa fa-eye"></i></button>
                     <button onclick="deleteData(`'. url('pembelian.destroy', $pembelian->id_pembelian) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
-=======
-                    <button onclick="showDetail(`'. route('pembelian.show', $pembelian->id_pembelian) .'`)" class="btn btn-xs btn-info btn-flat"><i class="fa fa-eye"></i></button>
-                    <button onclick="deleteData(`'. route('pembelian.destroy', $pembelian->id_pembelian) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
->>>>>>> d8e6ef8e3245eebed6ae2ce463295b0119af4271
                 </div>
                 ';
             })
