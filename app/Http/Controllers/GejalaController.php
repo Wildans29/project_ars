@@ -2,105 +2,121 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Aturan;
-use App\Models\Gejala;
-use App\Models\Kerusakan;
-use App\Models\Diagnosa;
 use Illuminate\Http\Request;
+use App\Models\Gejala;
 
 class GejalaController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
-        $gejala = Gejala::all();
-    
-        return view('master.gejala.index', compact('gejala'));
+        return view('master.gejala.index');
     }
-    
-    public function search()
+
+    public function data()
     {
-        try {
-            return datatables()->of(Gejala::all())->toJson();
-        } catch (\Exception $e) {
-            var_dump($e->getMessage());
-        }
+        $gejala = Gejala::orderBy('kode_gejala', 'asc')->get();
+
+        return datatables()
+            ->of($gejala)
+            ->addIndexColumn()
+            ->addColumn('kode_gejala', function ($gejala) {
+                return '<span class="label label-success">'. $gejala->kode_gejala .'</span>';
+            })
+            ->addColumn('pertanyaan', function ($gejala) {
+                return $gejala->pertanyaan;
+            })
+            ->addColumn('aksi', function ($gejala) {
+                return '
+                <div class="btn-group">
+                    <button type="button" onclick="editForm(`'. route('gejala.edit', $gejala->id) .'`)" class="btn btn-xs btn-info btn-flat"><i class="fa fa-pencil"></i></button>
+                    <button type="button" onclick="deleteData(`'. route('gejala.destroy', $gejala->id) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
+                </div>
+                ';
+            })
+            ->rawColumns(['aksi', 'kode_gejala'])
+            ->make(true);
     }
-    
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
-        return view('master.gejala.create');
+        //
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'id' => 'required',
-            'pertanyaan' => 'required',
-            'solusi' => 'required',
-            'is_first' => 'required',
-        ]);
+        $gejala = Gejala::create($request->all());
 
-        $gejalaBaru = new Gejala;
-        $gejalaBaru->id = $request->input('id');
-        $gejalaBaru->pertanyaan = $request->input('pertanyaan');
-        $gejalaBaru->solusi = $request->input('solusi');
-        $gejalaBaru->is_first = $request->input('is_first') ? 1 : 0;
-        $gejalaBaru->save();
-
-        return redirect()->route('gejala.index')->with('success', 'Gejala berhasil ditambahkan');
+        return response()->json(null, 204);
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $gejala = Gejala::find($id);
+
+        return response()->json($gejala);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function edit($id)
     {
-        $gejala = Gejala::find($id);
+        $gejala = Gejala::findOrFail($id);
 
-        return view('master.gejala.edit', compact('gejala'));
+        return response()->json($gejala);
     }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function update(Request $request, $id)
     {
-        try {
-            $validatedData = $request->validate([
-                'id' => 'required',
-                'pertanyaan' => 'required',
-                'solusi' => 'required',
-                'is_first' => 'required',
-            ]);
+        $gejala = Gejala::find($id);
+        $gejala->fill($request->all())->save();
 
-            $gejala = Gejala::find($id);
-            $gejala->update([
-                'id' => $request->input('id'),
-                'pertanyaan' => $request->input('pertanyaan'),
-                'solusi' => $request->input('solusi'),
-                'is_first' => $request->input('is_first') ? 1 : 0,
-            ]);
-        } catch (\Exception $e) {
-            dd($e->getMessage());
-        }
-
-        return redirect()->route('gejala.index')->with('success', 'Gejala berhasil diperbarui');
+        return response(null, 204);
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function destroy($id)
     {
-        $gejala = Gejala::find($id);
+        $gejala = Gejala::findOrFail($id);
         $gejala->delete();
 
-        return redirect()->route('gejala.index')->with('success', 'Gejala berhasil dihapus');
-    }
-    
-    public function upsertGejala($pertanyaanId)
-    {
-        $diagnosa = Diagnosa::find(session('diagnosaId'));
-        $gejala = Gejala::find($pertanyaanId);
-
-        if (!$diagnosa || !$gejala) {
-            return false;
-        }
-
-        $diagnosa->gejala()->syncWithoutDetaching([$gejala->id => ['jawaban' => true]]);
-        
-        return true;
+        return response()->json('Data berhasil dihapus', 200);
     }
 }

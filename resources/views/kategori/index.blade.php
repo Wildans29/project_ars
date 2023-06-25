@@ -17,7 +17,7 @@
                 <button onclick="addForm('{{ url('kategori/store/') }}')" class="btn btn-success btn-xs btn-flat"><i class="fa fa-plus-circle"></i> Tambah</button>
             </div>
             <div class="box-body table-responsive">
-                <table class="table table-stiped table-bordered">
+                <table class="table table-striped table-bordered">
                     <thead>
                         <th width="5%">No</th>
                         <th>Kategori</th>
@@ -76,7 +76,6 @@
     }
 
     function editForm(url) {
-        // console.log(url);
         $('#modal-form').modal('show');
         $('#modal-form .modal-title').text('Edit Kategori');
 

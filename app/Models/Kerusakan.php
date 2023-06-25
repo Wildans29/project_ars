@@ -3,17 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Kerusakan extends Model
 {
+    use HasFactory;
+    public $timestamps = true;
     protected $table = 'kerusakan';
     protected $primaryKey = 'id';
-    public $timestamps = false;
-
-    protected $fillable = [
-        'kode_kerusakan',
-        'nama',
-    ];
+    protected $guarded = [];
+    protected $fillable = ['kode_kerusakan','nama',];
 
     // Relasi dengan model Aturan
     public function aturan()

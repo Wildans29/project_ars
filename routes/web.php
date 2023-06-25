@@ -131,19 +131,23 @@ Route::group(['middleware' => 'auth'], function () {
     
 
         Route::prefix('master')->group(function() {
+            
             //MASTER KERUSAKAN
-            Route::get('kerusakan', [KerusakanController::class, 'index'])->name('kerusakan.index');
-            Route::get('kerusakan/search', [KerusakanController::class, 'search'])->name('kerusakan.search');
+            Route::get('/kerusakan', [KerusakanController::class, 'index'])->name('kerusakan.index');
+            Route::get('/data', [KerusakanController::class, 'data'])->name('kerusakan.data');
+            Route::post('/store', [KerusakanController::class, 'store'])->name('kerusakan.store');
+            Route::get('/edit/{id}', [KerusakanController::class, 'edit'])->name('kerusakan.edit');
+            Route::post('/edit/{id}', [KerusakanController::class, 'update']);
+            Route::delete('/destroy/{id}', [KerusakanController::class, 'destroy'])->name('kerusakan.destroy');
 
-            //MASTER GEJALA
-            Route::get('gejala', [GejalaController::class, 'index'])->name('gejala.index');
-            Route::get('gejala/search', [GejalaController::class, 'search'])->name('gejala.search');
-            Route::get('gejala/create', [GejalaController::class, 'create'])->name('gejala.create');
-            Route::post('gejala', [GejalaController::class, 'store'])->name('gejala.store');
-            Route::get('gejala/{id}/edit', [GejalaController::class, 'edit'])->name('gejala.edit');
-            Route::put('gejala/{id}', [GejalaController::class, 'update'])->name('gejala.update');
-            Route::delete('gejala/{id}', [GejalaController::class, 'destroy'])->name('gejala.destroy');
-        });
+            // MASTER GEJALA
+            Route::get('/gejala', [GejalaController::class, 'index'])->name('gejala.index');
+            Route::get('/data', [GejalaController::class, 'data'])->name('gejala.data');
+            Route::post('/store', [GejalaController::class, 'store'])->name('gejala.store');
+            Route::get('/edit/{id}', [GejalaController::class, 'edit'])->name('gejala.edit');
+            Route::post('/edit/{id}', [GejalaController::class, 'update']);
+            Route::delete('/destroy/{id}', [GejalaController::class, 'destroy'])->name('gejala.destroy');
+         });
             
             //ROUTE LAPORAN
         Route::prefix('laporan')->name('laporan.')->group(function () {

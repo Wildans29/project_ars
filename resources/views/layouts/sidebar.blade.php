@@ -67,12 +67,12 @@
             </li>
             <li class="header">Data sistem pakar</li>
             <li>
-                <a href="{{ route('gejala.index') }}">
+                <a href="{{ url('master/gejala/') }}">
                     <i class="fa fa-book"></i> <span>Gejala</span>
                 </a>
             </li>
             <li>
-                <a href="{{ route('kerusakan.index') }}">
+                <a href="{{ url('master/kerusakan/') }}">
                     <i class="fa fa-exclamation-triangle"></i> <span>Kerusakan</span>
                 </a>
             </li>

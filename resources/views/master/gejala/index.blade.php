@@ -1,5 +1,8 @@
-
 @extends('layouts.master')
+
+@section('title')
+    Daftar Gejala Kerusakan
+@endsection
 
 @section('breadcrumb')
     @parent
@@ -7,45 +10,111 @@
 @endsection
 
 @section('content')
-    <section class="content">
-        <!-- Default box -->
+<div class="row">
+    <div class="col-lg-12">
         <div class="box">
-            <div class="box-header">
-                <div class="pull-right">
-                </div>
+            <div class="box-header with-border">
+                <button onclick="addForm('{{ route('gejala.store') }}')" class="btn btn-success btn-xs btn-flat"><i class="fa fa-plus-circle"></i> Tambah</button>
             </div>
-            <div class="box-body">
-                <table class="table table-responsive table-condensed table-bordered" style="width: 100%">
+            <div class="box-body table-responsive">
+                <table class="table table-striped table-bordered">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Kode_gejala</th>
+                            <th width="5%">No</th>
+                            <th>Kode Gejala</th>
                             <th>Pertanyaan</th>
-                            {{-- <th>Solusi</th> --}}
-                            <td>Aksi</td>
+                            <th width="15%"><i class="fa fa-cog"></i></th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @foreach ($gejala as $key => $item)
-                            <tr>
-                                <td>{{ $key + 1 }}</td>
-                                <td>{{ $item->kode_gejala }}</td>
-                                <td>{{ $item->pertanyaan }}</td>
-                                {{-- <td>{{ $item->solusi }}</td> --}}
-                                <td>
-                                    <a href="{{ route('gejala.edit', $item->id) }}" class="btn btn-primary">Edit</a>
-                                    <form action="{{ route('gejala.destroy', $item->id) }}" method="POST" style="display: inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">Hapus</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
                 </table>
-                <a href="{{ url('/master/gejala/create') }}" class="btn btn-success">Tambah Gejala</a>
             </div>
         </div>
-    </section>
+    </div>
+</div>
+
+@includeIf('master.gejala.form')
 @endsection
+
+@push('scripts')
+<script>
+    let table;
+
+    $(function () {
+        table = $('.table').DataTable({
+            processing: true,
+            autoWidth: false,
+            ajax: {
+                url: '{{ route('gejala.data') }}',
+            },
+            columns: [
+                {data: 'DT_RowIndex', searchable: false, sortable: false},
+                {data: 'kode_gejala'},
+                {data: 'pertanyaan'},
+                {data: 'aksi', searchable: false, sortable: false},
+            ]
+        });
+
+        $('#modal-form').validator().on('submit', function (e) {
+            if (! e.preventDefault()) {
+                $.post($('#modal-form form').attr('action'), $('#modal-form form').serialize())
+                .done((response) => {
+                            $('#modal-form').modal('hide');
+                            table.ajax.reload();
+                        })
+                        .fail((errors) => {
+                            alert('Tidak dapat menyimpan data');
+                            return;
+                        });
+            }
+        });
+    });
+
+    function addForm(url) {
+        $('#modal-form').modal('show');
+        $('#modal-form .modal-title').text('Tambah Gejala');
+
+        $('#modal-form form')[0].reset();
+        $('#modal-form form').attr('action', url);
+        $('#modal-form [name=_method]').val('post');
+        $('#modal-form [name=kode_gejala]').focus();
+    }
+
+    function editForm(url) {
+        $('#modal-form').modal('show');
+        $('#modal-form .modal-title').text('Edit Gejala');
+
+        $('#modal-form form')[0].reset();
+        $('#modal-form form').attr('action', url);
+        $('#modal-form [name=_method]').val('post');
+
+        $.get(url)
+            .done(function(response) {
+                $('#modal-form [name=kode_gejala]').val(response.kode_gejala);
+                $('#modal-form [name=pertanyaan]').val(response.pertanyaan);
+            })
+            .fail(function(errors) {
+                alert('Tidak dapat menampilkan data');
+            });
+    }
+
+    function deleteData(url) {
+        if (confirm('Yakin ingin menghapus data terpilih?')) {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: url,
+                type: 'DELETE',
+                success: function(response) {
+                    table.ajax.reload();
+                },
+                error: function(errors) {
+                    alert('Tidak dapat menghapus data');
+                }
+            });
+        }
+    }
+</script>
+@endpush
