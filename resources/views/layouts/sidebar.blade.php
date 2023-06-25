@@ -25,39 +25,23 @@
             @if (auth()->user()->level == 1)
             <li class="header">MASTER</li>
             <li>
-<<<<<<< HEAD
                 <a href="{{ url('kategori/') }}">
-=======
-                <a href="{{ route('kategori.index') }}">
->>>>>>> d8e6ef8e3245eebed6ae2ce463295b0119af4271
                     <i class="fa fa-cube"></i> <span>Kategori</span>
                 </a>
             </li>
             <li>
-<<<<<<< HEAD
                 <a href="{{ url('produk/') }}">
-=======
-                <a href="{{ route('produk.index') }}">
->>>>>>> d8e6ef8e3245eebed6ae2ce463295b0119af4271
                     <i class="fa fa-cubes"></i> <span>Produk</span>
                 </a>
             </li>
             <li>
-<<<<<<< HEAD
                 <a href="{{ url('supplier/') }}">
-=======
-                <a href="{{ route('supplier.index') }}">
->>>>>>> d8e6ef8e3245eebed6ae2ce463295b0119af4271
                     <i class="fa fa-truck"></i> <span>Supplier</span>
                 </a>
             </li>
             <li class="header">TRANSAKSI</li>
             <li>
-<<<<<<< HEAD
                 <a href="{{ url('pengeluaran/') }}">
-=======
-                <a href="{{ route('pengeluaran.index') }}">
->>>>>>> d8e6ef8e3245eebed6ae2ce463295b0119af4271
                     <i class="fa fa-money"></i> <span>Pengeluaran</span>
                 </a>
             </li>
@@ -75,8 +59,8 @@
                 <a href="{{ route('transaksi.index') }}">
                     <i class="fa fa-cart-arrow-down"></i> <span>Transaksi Aktif</span>
                 </a>
-            </li>
-            <li> --}}
+            </li>--}}
+            <li> 
                 <a href="{{ route('transaksi.baru') }}">
                     <i class="fa fa-cart-arrow-down"></i> <span>Transaksi Baru</span>
                 </a>

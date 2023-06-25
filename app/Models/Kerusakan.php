@@ -7,10 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 class Kerusakan extends Model
 {
     protected $table = 'kerusakan';
-    protected $fillable = ['kode_kerusan', 'nama'];
+    protected $primaryKey = 'id';
+    public $timestamps = false;
 
-    public function aturans()
+    protected $fillable = [
+        'kode_kerusakan',
+        'nama',
+    ];
+
+    // Relasi dengan model Aturan
+    public function aturan()
     {
-        return $this->hasMany(Aturan::class, 'kode_kerusakan', 'kode_gejala');
+        return $this->hasMany(Aturan::class, 'kode_kerusakan', 'kode_kerusakan');
     }
 }

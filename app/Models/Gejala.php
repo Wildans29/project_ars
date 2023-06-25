@@ -8,13 +8,17 @@ class Gejala extends Model
 {
     protected $table = 'gejala';
 
-    protected $guarded = ['id', 'created_at', 'updated_at'];
+    public $incrementing = true;
 
-    public function penyakit() {
-    	return $this->belongsToMany('App\Models\Penyakit', 'aturan');
-    }
+    protected $fillable  = ['id', 'kode_gejala', 'pertanyaan', 'solusi', 'is_first'];
 
-    public function pasien() {
-    	return $this->belongsToMany('App\Models\Pasien', 'tmp_gejala');
-    }
+    public function kerusakan()
+{
+    return $this->belongsTo(Kerusakan::class, 'kode_gejala', 'kode_kerusakan');
+}
+
+//     public function kerusakan()
+//     {
+//         return $this->belongsToMany(Kerusakan::class, 'aturan', 'kode_gejala', 'kode_kerusakan');
+//     }
 }

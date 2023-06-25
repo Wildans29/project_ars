@@ -11,7 +11,7 @@ class Aturan extends Model
 
     public function kerusakan()
     {
-        return $this->belongsTo(Kerusakan::class, 'kode_kerusakan', 'kode');
+        return $this->belongsTo(Kerusakan::class, 'kode_kerusakan', 'kode_kerusakan');
     }
 
     public function gejala()
@@ -19,3 +19,4 @@ class Aturan extends Model
         return $this->belongsTo(Gejala::class, 'kode_gejala', 'kode_gejala');
     }
 }
+

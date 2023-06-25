@@ -12,10 +12,10 @@
 @section('content')
     <div class="box">
         <div class="box-header with-border">
-            <h3 class="box-title">{{ $data->nama}}</h3>
+            <h3 class="box-title text-bold">Silahkan jawab pertanyaan sesuai gejala yang anda alami!</h3>
         </div>
         <div class="box-body">
-            {{ $data->pertanyaan }}
+                {{ $data->pertanyaan }}
             <br>
         </div>
         <!-- /.box-body -->
