@@ -133,6 +133,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::prefix('master')->group(function() {
             
             //MASTER KERUSAKAN
+            Route::get('/', [PembelianController::class, 'data'])->name('kerusakan.data');
             Route::get('/kerusakan', [KerusakanController::class, 'index'])->name('kerusakan.index');
             Route::get('/data', [KerusakanController::class, 'data'])->name('kerusakan.data');
             Route::post('/store', [KerusakanController::class, 'store'])->name('kerusakan.store');

@@ -13,7 +13,7 @@ class Gejala extends Model
     protected $primaryKey = 'id';
     protected $guarded = [];
     protected $fillable  = ['id', 'kode_gejala', 'pertanyaan', 'is_first'];
-    // public $incrementing = true;
+
 
     public function kerusakan()
     {
