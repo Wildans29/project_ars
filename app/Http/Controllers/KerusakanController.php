@@ -65,6 +65,7 @@ class KerusakanController extends Controller
         return response()->json(null, 204);
     }
 
+
     /**
      * Display the specified resource.
      *

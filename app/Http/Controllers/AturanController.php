@@ -4,103 +4,122 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Aturan;
-use App\Models\Gejala;
-use App\Models\Kerusakan;
-use App\Models\Diagnosa;
-
 
 class AturanController extends Controller
 {
-    public function executeQuestion($id, $pertanyaanId, $isTrue)
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
     {
-        // Simpan jawaban kode gejala ke dalam kolom "gejala" pada tabel "diagnosa"
-        (new Diagnosa())->upsertGejala($id, $pertanyaanId);
-
-        // Ambil data diagnosa berdasarkan ID
-        $diagnosa = Diagnosa::find($id);
-
-        // Ambil kode gejala yang disimpan dalam kolom "gejala" pada tabel "diagnosa"
-        $gejala = $diagnosa->gejala;
-
-        // Cari aturan yang sesuai berdasarkan kode gejala
-        $aturan = Aturan::where('kode_gejala', $gejala)->first();
-
-        if ($aturan) {
-            // Ambil pertanyaan berikutnya berdasarkan aturan yang sesuai
-            $nextPertanyaanId = $aturan->gejala->kode_gejala;
-
-            if ($nextPertanyaanId) {
-                $data = Gejala::where('kode_gejala', $nextPertanyaanId)->first();
-
-                $data["diagnosaId"] = $id;
-                return view('diagnosa/question', compact("data"));
-            }
-        }
-
-        // Jika tidak ada pertanyaan berikutnya, cocokkan gejala dengan aturan untuk mendapatkan jenis kerusakan
-        $jenisKerusakan = $aturan->kerusakan->nama;
-
-        // Redirect ke halaman hasil dengan menampilkan jenis kerusakan
-        return redirect()->route('diagnosa.result', ['id' => $id])->with(['success' => 'Jenis Kerusakan: ' . $jenisKerusakan]);
+        return view('master.aturan.index');
     }
 
-    public function show($id)
+    public function data()
     {
-        $aturan = Aturan::findOrFail($id);
-        return view('aturan.show', compact('aturan'));
+        $aturan = Aturan::orderBy('kode_kerusakan', 'asc')->get();
+
+        return datatables()
+            ->of($aturan)
+            ->addIndexColumn()
+            ->addColumn('kode_kerusakan', function ($aturan) {
+                return '<span class="label label-success">' . $aturan->kode_kerusakan . '</span>';
+            })
+            ->addColumn('kode_gejala', function ($aturan) {
+                return $aturan->kode_gejala;
+            })
+            ->addColumn('solusi', function ($aturan) {
+                return $aturan->solusi;
+            })
+            ->addColumn('aksi', function ($aturan) {
+                return '
+                <div class="btn-group">
+                    <button type="button" onclick="editForm(`' . route('aturan.edit', $aturan->id) . '`)" class="btn btn-xs btn-info btn-flat"><i class="fa fa-pencil"></i></button>
+                    <button type="button" onclick="deleteData(`' . route('aturan.destroy', $aturan->id) . '`)" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
+                </div>
+                ';
+            })
+            ->rawColumns(['aksi', 'kode_kerusakan'])
+            ->make(true);
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
-        $gejala = Gejala::all();
-        $kerusakan = Kerusakan::all();
-        return view('aturan.create', compact('gejala', 'kerusakan'));
+        //
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
-        $request->validate([
-            'kode_kerusakan' => 'required',
-            'kode_gejala' => 'required',
-        ]);
+        $aturan = Aturan::create($request->all());
 
-        Aturan::create($request->all());
-
-        return redirect()->route('aturan.index')->with('success', 'Aturan berhasil ditambahkan!');
+        return response()->json(null, 204);
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $aturan = Aturan::find($id);
+
+        return response()->json($aturan);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function edit($id)
     {
         $aturan = Aturan::findOrFail($id);
-        $gejala = Gejala::all();
-        $kerusakan = Kerusakan::all();
-        return view('aturan.edit', compact('aturan', 'gejala', 'kerusakan'));
+
+        return response()->json($aturan);
     }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'kode_kerusakan' => 'required',
-            'kode_gejala' => 'required',
-        ]);
+        $aturan = Aturan::find($id);
+        $aturan->fill($request->all())->save();
 
-        $aturan = Aturan::findOrFail($id);
-        $aturan->update($request->all());
-
-        return redirect()->route('aturan.index')->with('success', 'Aturan berhasil diperbarui!');
+        return response(null, 204);
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function destroy($id)
     {
         $aturan = Aturan::findOrFail($id);
         $aturan->delete();
 
-        return redirect()->route('aturan.index')->with('success', 'Aturan berhasil dihapus!');
-    }
-
-    public function index()
-    {
-        $aturan = Aturan::all();
-        return view('aturan.index', compact('aturan'));
+        return response()->json('Data berhasil dihapus', 200);
     }
 }

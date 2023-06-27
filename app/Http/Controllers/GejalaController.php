@@ -25,7 +25,7 @@ class GejalaController extends Controller
             ->of($gejala)
             ->addIndexColumn()
             ->addColumn('kode_gejala', function ($gejala) {
-                return '<span class="label label-success">'. $gejala->kode_gejala .'</span>';
+                return '<span class="label label-success">' . $gejala->kode_gejala . '</span>';
             })
             ->addColumn('pertanyaan', function ($gejala) {
                 return $gejala->pertanyaan;
@@ -33,8 +33,8 @@ class GejalaController extends Controller
             ->addColumn('aksi', function ($gejala) {
                 return '
                 <div class="btn-group">
-                    <button type="button" onclick="editForm(`'. route('gejala.edit', $gejala->id) .'`)" class="btn btn-xs btn-info btn-flat"><i class="fa fa-pencil"></i></button>
-                    <button type="button" onclick="deleteData(`'. route('gejala.destroy', $gejala->id) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
+                    <button type="button" onclick="editForm(`' . route('gejala.edit', $gejala->id) . '`)" class="btn btn-xs btn-info btn-flat"><i class="fa fa-pencil"></i></button>
+                    <button type="button" onclick="deleteData(`' . route('gejala.destroy', $gejala->id) . '`)" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
                 </div>
                 ';
             })
@@ -101,7 +101,7 @@ class GejalaController extends Controller
     public function update(Request $request, $id)
     {
         $gejala = Gejala::find($id);
-        $gejala->fill($request->all())->save();
+        $gejala->fill($request->only(['kode_gejala', 'pertanyaan']))->save();
 
         return response(null, 204);
     }

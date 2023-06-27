@@ -46,7 +46,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('pembelian.index') }}">
+                <a href="{{ url('pembelian/') }}">
                     <i class="fa fa-download"></i> <span>Pembelian</span>
                 </a>
             </li>
@@ -74,6 +74,11 @@
             <li>
                 <a href="{{ url('master/kerusakan/') }}">
                     <i class="fa fa-exclamation-triangle"></i> <span>Kerusakan</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ url('master/aturan/') }}">
+                    <i class="fa fa-wrench"></i> <span>Aturan</span>
                 </a>
             </li>
             <li>

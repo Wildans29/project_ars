@@ -14,9 +14,10 @@ class CreateAturanTable extends Migration
     public function up()
     {
         Schema::create('aturan', function (Blueprint $table) {
-            $table->id();
-            $table->string('kondisi');
-            $table->string('aksi');
+            $table->bigIncrements('id');
+            $table->text('kode_kerusakan');
+            $table->text('kode_gejala');
+            $table->text('solusi');
             $table->timestamps();
         });
     }

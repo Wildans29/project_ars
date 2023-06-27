@@ -12,17 +12,12 @@ class Gejala extends Model
     protected $table = 'gejala';
     protected $primaryKey = 'id';
     protected $guarded = [];
-    protected $fillable  = ['id', 'kode_gejala', 'pertanyaan', 'is_first'];
+    protected $fillable  = ['kode_gejala', 'pertanyaan','is_first'];
 
 
     public function kerusakan()
     {
-        return $this->belongsTo(Kerusakan::class, 'kode_gejala', 'kode_kerusakan');
+        return $this->hasMany(Kerusakan::class, 'kode_gejala', 'kode_kerusakan');
     }
-    
-    //     public function kerusakan()
-    //     {
-    //         return $this->belongsToMany(Kerusakan::class, 'aturan', 'kode_gejala', 'kode_kerusakan');
-    //     }
     
 }

@@ -17,7 +17,8 @@ use App\Http\Controllers\{
     BookingController,
     GejalaController,
     KerusakanController,
-    DiagnosaController
+    DiagnosaController,
+    AturanController
 };
 use Illuminate\Support\Facades\Route;
 
@@ -133,21 +134,28 @@ Route::group(['middleware' => 'auth'], function () {
         Route::prefix('master')->group(function() {
             
             //MASTER KERUSAKAN
-            Route::get('/', [PembelianController::class, 'data'])->name('kerusakan.data');
             Route::get('/kerusakan', [KerusakanController::class, 'index'])->name('kerusakan.index');
-            Route::get('/data', [KerusakanController::class, 'data'])->name('kerusakan.data');
-            Route::post('/store', [KerusakanController::class, 'store'])->name('kerusakan.store');
-            Route::get('/edit/{id}', [KerusakanController::class, 'edit'])->name('kerusakan.edit');
-            Route::post('/edit/{id}', [KerusakanController::class, 'update']);
-            Route::delete('/destroy/{id}', [KerusakanController::class, 'destroy'])->name('kerusakan.destroy');
+            Route::get('/kerusakan/data', [KerusakanController::class, 'data'])->name('kerusakan.data');
+            Route::post('/kerusakan/store', [KerusakanController::class, 'store'])->name('kerusakan.store');
+            Route::get('/kerusakan/edit/{id}', [KerusakanController::class, 'edit'])->name('kerusakan.edit');
+            Route::post('/kerusakan/edit/{id}', [KerusakanController::class, 'update']);
+            Route::delete('/kerusakan/destroy/{id}', [KerusakanController::class, 'destroy'])->name('kerusakan.destroy');
 
             // MASTER GEJALA
             Route::get('/gejala', [GejalaController::class, 'index'])->name('gejala.index');
-            Route::get('/data', [GejalaController::class, 'data'])->name('gejala.data');
-            Route::post('/store', [GejalaController::class, 'store'])->name('gejala.store');
-            Route::get('/edit/{id}', [GejalaController::class, 'edit'])->name('gejala.edit');
-            Route::post('/edit/{id}', [GejalaController::class, 'update']);
-            Route::delete('/destroy/{id}', [GejalaController::class, 'destroy'])->name('gejala.destroy');
+            Route::get('/gejala/data', [GejalaController::class, 'data'])->name('gejala.data'); // Perubahan pada rute ini
+            Route::post('/gejala/store', [GejalaController::class, 'store'])->name('gejala.store');
+            Route::get('/gejala/edit/{id}', [GejalaController::class, 'edit'])->name('gejala.edit');
+            Route::post('/gejala/edit/{id}', [GejalaController::class, 'update']);
+            Route::delete('/gejala/destroy/{id}', [GejalaController::class, 'destroy'])->name('gejala.destroy');
+
+            // MASTER ATURAN
+            Route::get('/aturan', [AturanController::class, 'index'])->name('aturan.index');
+            Route::get('/aturan/data', [AturanController::class, 'data'])->name('aturan.data');
+            Route::post('/aturan/store', [AturanController::class, 'store'])->name('aturan.store');
+            Route::get('/aturan/edit/{id}', [AturanController::class, 'edit'])->name('aturan.edit');
+            Route::post('/aturan/edit/{id}', [AturanController::class, 'update']);
+            Route::delete('/aturan/destroy/{id}', [AturanController::class, 'destroy'])->name('aturan.destroy');
          });
             
             //ROUTE LAPORAN

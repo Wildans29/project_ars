@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Kerusakan extends Model
 {
     use HasFactory;
-
+    public $timestamps = true;
     protected $table = 'kerusakan';
     protected $primaryKey = 'id';
     protected $guarded = [];
@@ -17,6 +17,6 @@ class Kerusakan extends Model
     // Relasi dengan model Aturan
     public function aturan()
     {
-        return $this->belongsTo(Aturan::class, 'kode_kerusakan', 'kode_kerusakan');
+        return $this->hasMany(Aturan::class, 'kode_kerusakan', 'kode_kerusakan');
     }
 }
