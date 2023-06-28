@@ -143,7 +143,7 @@ Route::group(['middleware' => 'auth'], function () {
 
             // MASTER GEJALA
             Route::get('/gejala', [GejalaController::class, 'index'])->name('gejala.index');
-            Route::get('/gejala/data', [GejalaController::class, 'data'])->name('gejala.data'); // Perubahan pada rute ini
+            Route::get('/gejala/data', [GejalaController::class, 'data'])->name('gejala.data');
             Route::post('/gejala/store', [GejalaController::class, 'store'])->name('gejala.store');
             Route::get('/gejala/edit/{id}', [GejalaController::class, 'edit'])->name('gejala.edit');
             Route::post('/gejala/edit/{id}', [GejalaController::class, 'update']);
