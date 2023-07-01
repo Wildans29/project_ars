@@ -37,5 +37,7 @@
             @endforeach
         </tbody>
     </table>
+
+    <script src="{{ asset('/AdminLTE-2/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 </body>
 </html>

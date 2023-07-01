@@ -19,7 +19,8 @@ class PembelianController extends Controller
 
     public function data()
     {
-        $pembelian = Pembelian::orderBy('id_pembelian', 'desc')->with('supplier')->get();
+        $pembelian = Pembelian::orderBy('id_pembelian', 'desc')->get();
+
         return datatables()
             ->of($pembelian)
             ->addIndexColumn()
@@ -36,7 +37,7 @@ class PembelianController extends Controller
                 return tanggal_indonesia($pembelian->created_at, false);
             })
             ->addColumn('supplier', function ($pembelian) {
-                return $pembelian->supplier ? $pembelian->supplier->nama : '-';
+                return $pembelian->supplier->nama;
             })
             ->editColumn('diskon', function ($pembelian) {
                 return $pembelian->diskon . '%';
@@ -44,8 +45,8 @@ class PembelianController extends Controller
             ->addColumn('aksi', function ($pembelian) {
                 return '
                 <div class="btn-group">
-                    <button onclick="showDetail(`'. url('pembelian.edit', $pembelian->id_pembelian) .'`)" class="btn btn-xs btn-info btn-flat"><i class="fa fa-eye"></i></button>
-                    <button onclick="deleteData(`'. url('pembelian.destroy', $pembelian->id_pembelian) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
+                    <button onclick="showDetail(`'. route('pembelian.show', $pembelian->id_pembelian) .'`)" class="btn btn-xs btn-info btn-flat"><i class="fa fa-eye"></i></button>
+                    <button onclick="deleteData(`'. route('pembelian.destroy', $pembelian->id_pembelian) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
                 </div>
                 ';
             })

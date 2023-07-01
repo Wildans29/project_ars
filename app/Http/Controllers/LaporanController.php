@@ -6,7 +6,8 @@ use App\Models\Pembelian;
 use App\Models\Pengeluaran;
 use App\Models\Penjualan;
 use Illuminate\Http\Request;
-use PDF;
+use Mpdf\Mpdf;
+
 
 class LaporanController extends Controller
 {
@@ -76,9 +77,11 @@ class LaporanController extends Controller
     public function exportPDF($awal, $akhir)
     {
         $data = $this->getData($awal, $akhir);
-        $pdf  = PDF::loadView('laporan.pdf', compact('awal', 'akhir', 'data'));
-        $pdf->setPaper('a4', 'potrait');
-        
-        return $pdf->stream('Laporan-pendapatan-'. date('Y-m-d-his') .'.pdf');
+        $view = view('laporan.pdf', compact('awal', 'akhir', 'data'))->render();
+    
+        $mpdf = new Mpdf();
+        $mpdf->WriteHTML($view);
+        $mpdf->Output('Laporan-pendapatan-' . date('Y-m-d-his') . '.pdf', 'D');
     }
+    
 }

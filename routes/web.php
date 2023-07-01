@@ -30,10 +30,11 @@ Route::get('/register', function () {
     return view('auth.register');
 })->name('register');
 
+Route::get('/show/{id}', [UserController::class, 'show'])->name('user.show');
 Route::post('/register', [UserController::class, 'register'])->name('user.register');
 Route::post('/store', [UserController::class, 'store'])->name('user.store');
 Route::get('/show/{id}', [UserController::class, 'show'])->name('user.show');
-Route::put('/update/{id}', [UserController::class, 'update'])->name('user.update');
+Route::put('/update/{id}', [UserController::class, 'update']);
 Route::delete('/destroy/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 
 Route::group(['middleware' => 'auth'], function () {
@@ -87,23 +88,17 @@ Route::group(['middleware' => 'auth'], function () {
         });
 
         //ROUTE PEMBELIAN
-        Route::prefix('pembelian')->name('pembelian.')->group(function () {
-            Route::get('/{id}/create', [PembelianController::class, 'create'])->name('create');
-            Route::get('/', [PembelianController::class, 'index'])->name('index');
-            Route::get('/data', [PembelianController::class, 'data'])->name('data');
-            Route::post('/store', [PembelianController::class, 'store'])->name('store');
-            Route::get('/edit/{id}', [PembelianController::class, 'edit'])->name('edit');
-            Route::post('/edit/{id}', [PembelianController::class, 'update']);
-            Route::delete('/destroy/{id}', [PembelianController::class, 'destroy'])->name('destroy');
-            Route::get('/{id}/create', [PembelianController::class, 'create'])->name('create');
-        });
+        Route::get('/pembelian/data', [PembelianController::class, 'data'])->name('pembelian.data');
+        Route::get('/pembelian/{id}/create', [PembelianController::class, 'create'])->name('pembelian.create');
+        Route::resource('/pembelian', PembelianController::class)
+            ->except('create');
 
         //ROUTE PEMBELIAN DETAIL
-        Route::prefix('pembelian_detail')->name('pembelian_detail.')->group(function () {
-            Route::get('/{id}/data', [PembelianDetailController::class, 'data'])->name('data');
-            Route::get('/loadform/{diskon}/{total}', [PembelianDetailController::class, 'loadForm'])->name('load_form');
-            Route::resource('/', PembelianDetailController::class)->except('create', 'show', 'edit');
-        });
+        Route::get('/pembelian_detail/{id}/data', [PembelianDetailController::class, 'data'])->name('pembelian_detail.data');
+        Route::get('/pembelian_detail/loadform/{diskon}/{total}', [PembelianDetailController::class, 'loadForm'])->name('pembelian_detail.load_form');
+        Route::resource('/pembelian_detail', PembelianDetailController::class)
+            ->except('create', 'show', 'edit');
+
 
         //ROUTE PENJUALAN
         Route::prefix('penjualan')->name('penjualan.')->group(function () {
@@ -115,20 +110,19 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     //ROUTE USER LEVEL 1 (ADMIN)
-    Route::group(['middleware' => 'level:1'], function () {
-        Route::prefix('transaksi')->name('transaksi.')->group(function () {
-            Route::get('/baru', [penjualanController::class, 'create'])->name('baru');
-            Route::post('/simpan', [PenjualanController::class, 'store'])->name('simpan'); 
-            Route::get('/selesai', [PenjualanController::class, 'selesai'])->name('selesai');
-            Route::get('/nota-kecil', [PenjualanController::class, 'notaKecil'])->name('nota_kecil');
-            Route::get('/nota-besar', [PenjualanController::class, 'notaBesar'])->name('nota_besar');
-        });
+   
+    Route::group(['middleware' => 'level:1,2'], function () {
+        Route::get('/transaksi/baru', [PenjualanController::class, 'create'])->name('transaksi.baru');
+        Route::post('/transaksi/simpan', [PenjualanController::class, 'store'])->name('transaksi.simpan');
+        Route::get('/transaksi/selesai', [PenjualanController::class, 'selesai'])->name('transaksi.selesai');
+        Route::get('/transaksi/nota-kecil', [PenjualanController::class, 'notaKecil'])->name('transaksi.nota_kecil');
+        Route::get('/transaksi/nota-besar', [PenjualanController::class, 'notaBesar'])->name('transaksi.nota_besar');
 
-        Route::prefix('transaksi')->name('transaksi.')->group(function () {
-            Route::get('/{id}/data', [PenjualanDetailController::class, 'data'])->name('data');
-            Route::get('/loadform/{diskon}/{total}/{diterima}', [PenjualanDetailController::class, 'loadForm'])->name('load_form');
-            Route::resource('/', PenjualanDetailController::class)->except('create', 'show', 'edit');
-        });
+        Route::get('/transaksi/{id}/data', [PenjualanDetailController::class, 'data'])->name('transaksi.data');
+        Route::get('/transaksi/loadform/{diskon}/{total}/{diterima}', [PenjualanDetailController::class, 'loadForm'])->name('transaksi.load_form');
+        Route::resource('/transaksi', PenjualanDetailController::class)
+            ->except('create', 'show', 'edit');
+    
     
 
         Route::prefix('master')->group(function() {
@@ -159,17 +153,29 @@ Route::group(['middleware' => 'auth'], function () {
          });
             
             //ROUTE LAPORAN
-        Route::prefix('laporan')->name('laporan.')->group(function () {
-            Route::get('/', [LaporanController::class, 'index'])->name('index');
-            Route::get('/data/{awal}/{akhir}', [LaporanController::class, 'data'])->name('data');
-            Route::get('/pdf/{awal}/{akhir}', [LaporanController::class, 'exportPDF'])->name('export_pdf');
-        });
+            Route::group(['middleware' => 'level:1'], function () {
+                Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
+                Route::get('/laporan/data/{awal}/{akhir}', [LaporanController::class, 'data'])->name('laporan.data');
+                Route::get('/laporan/pdf/{awal}/{akhir}', [LaporanController::class, 'exportPDF'])->name('laporan.export_pdf');
+        
+                Route::get('/user/data', [UserController::class, 'data'])->name('user.data');
+                Route::resource('/user', UserController::class);
+        
+                Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
+                Route::get('/setting/first', [SettingController::class, 'show'])->name('setting.show');
+                Route::post('/setting', [SettingController::class, 'update'])->name('setting.update');
+            });
 
             //ROUTE USER
         Route::prefix('user')->name('user.')->group(function () {
+            Route::get('/', [UserController::class, 'index'])->name('index');
             Route::get('/data', [UserController::class, 'data'])->name('data');
-            Route::resource('/', UserController::class);
+            Route::post('/store', [UserController::class, 'store'])->name('store');
+            Route::get('/edit/{id}', [UserController::class, 'edit'])->name('edit');
+            Route::post('/edit/{id}', [UserController::class, 'update'])->name('update');
+            Route::delete('/destroy/{id}', [UserController::class, 'destroy'])->name('destroy');
         });
+            
 
             //ROUTE SETTING
         Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');

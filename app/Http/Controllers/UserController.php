@@ -5,33 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
 {
-    public function register(Request $request)
-    {
-        $this->validate($request, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'phone_number' => 'required|string|max:15|unique:users',
-            'password' => 'required|string|min:8|confirmed',
-        ]);
-    
-      
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->phone_number = $request->phone_number;
-        $user->password = bcrypt($request->password);
-        $user->level = 2;
-        $user->foto = '/img/user.jpg';
-        $user->save();
-    
-        return redirect('/login')->with('success', 'Akun Anda telah berhasil terdaftar! Silakan login.');
-    }
-    
-
     public function index()
     {
         return view('user.index');
@@ -55,12 +31,17 @@ class UserController extends Controller
             ->rawColumns(['aksi'])
             ->make(true);
     }
+
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    
+    public function create()
+    {
+        //
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -89,9 +70,6 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        if (!$user) {
-            return response()->json('Pengguna tidak ditemukan', 404);
-        }
 
         return response()->json($user);
     }
@@ -104,7 +82,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        return response()->json($user);
     }
 
     /**
@@ -169,11 +149,9 @@ class UserController extends Controller
 
             $user->foto = "/img/$nama";
         }
-        
 
         $user->update();
 
         return response()->json($user, 200);
     }
-    
 }
