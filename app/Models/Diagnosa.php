@@ -17,53 +17,55 @@ class Diagnosa extends Model
     //     return $this->hasMany(Gejala::class, 'gejala', 'id');
     // }
 
-  
-
-
-    
-
     public function getResultDiagnosa($id)
-{
-    // Ambil diagnosa berdasarkan ID
-    $diagnosa = self::where('id', $id)->first();
+    {
+        // Ambil diagnosa berdasarkan ID
+        $diagnosa = self::where('id', $id)->first();
 
-    // Ambil gejala yang terekam
-    $gejalaTerekam = explode(",", $diagnosa->gejala);
+        // Ambil gejala yang terekam
+        $gejalaTerekam = explode(",", $diagnosa->gejala);
+        
+        // Cari aturan yang cocok dengan gejala yang terekam
+        $aturanCocok = Aturan::where('kode_gejala', implode(",", $gejalaTerekam))->get();
+        
+        $kerusakan = [];
+        $solusi = [];
+        
+        // Ambil kode kerusakan dan solusi dari aturan yang cocok
+        foreach ($aturanCocok as $aturan) {
+            $kerusakan[] = $aturan->kerusakan->nama;
+            $solusi[] = $aturan->solusi;
+        }
+        
+        // Kembalikan hasil diagnosa
+        return [
+            'kerusakan' => $kerusakan,
+            'solusi' => $solusi
+        ];
 
-    // Cari aturan yang cocok dengan gejala yang terekam
-    $aturanCocok = Aturan::where('kode_gejala', implode(",", $gejalaTerekam))->get();
-
-    $kerusakan = [];
-    $solusi = [];
-
-    // Ambil kode kerusakan dan solusi dari aturan yang cocok
-    foreach ($aturanCocok as $aturan) {
-        $kerusakan[] = $aturan->kerusakan->nama;
-        $solusi[] = $item['solusi'];
     }
-    
-    // Kembalikan hasil diagnosa
-    return [
-        'kerusakan' => $kerusakan,
-        'solusi' => $solusi
-    ];
-}
 
 
-    public function upsertGejala($pertanyaanId)
+    public function upsertGejala($id, $pertanyaanId)
     {
         // Ambil gejala yang sudah ada
-        $gejala  = $pertanyaanId;
+        $pertanyaan  = $pertanyaanId;
         // $gejala = $this->gejala;
 
-        
-        if (empty($gejala)) {
+        if (empty($pertanyaan)) {
             $gejala = [];
         } else {
-            $gejala = explode(",", $gejala);
+            $gejala = $pertanyaan;
+            // $gejala = explode(",", $gejala);
+            $diagnosa = self::where('id', $id)->first();
+            $mergeGejala = $diagnosa->gejala . ','. $gejala;
+            $hasil = ltrim($mergeGejala, ', ');
+
+            $this->gejala = $hasil;
+            $this->save();
         }
-        $this->gejala = implode(",", $gejala);
-        $this->save();
+
+        // $this->gejala = implode(",", $gejala);
         
         // Cek apakah pertanyaan sudah dijawab sebelumnya
         // if (!in_array($this->id, $gejala)) {
@@ -76,21 +78,20 @@ class Diagnosa extends Model
         // Explode gejala dalam table diagnosa dari separated comma ke array
     
        // Ambil pertanyaan berikutnya
-        $nextGejala = Gejala::whereNotIn('id', $gejala)->orderBy('id')->first();
+        // $nextGejala = Gejala::whereNotIn('kode_gejala', [$gejala])->first();
 
-        return $nextGejala;
+        // return $nextGejala;
         // return true;
     }
 
-    public function getNextGejala()
-    {
+    // public function getNextGejala()
+    // {
+    //    // Explode gejala dalam table diagnosa dari separated comma ke array
+    //     $gejala = explode(",", $this->gejala);;
 
-       // Explode gejala dalam table diagnosa dari separated comma ke array
-        $gejala = explode(",", $this->gejala);
-    
-       // Ambil pertanyaan berikutnya
-        $nextGejala = Gejala::whereNotIn('id', $gejala)->orderBy('id')->first();
+    //    // Ambil pertanyaan berikutnya
+    //     $nextGejala = Gejala::whereNotIn('kode_gejala', $gejala)->first();
 
-        return $nextGejala;
-    }
+    //     return $nextGejala;
+    // }
 }
