@@ -1,14 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Laporan Pendapatan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
 
-    <link rel="stylesheet" href="{{ asset('/AdminLTE-2/bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table th,
+        table td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #f5f5f5;
+            font-weight: bold;
+        }
+
+        table td:first-child {
+            width: 5%;
+        }
+    </style>
 </head>
+
 <body>
+<div class="container">
     <h3 class="text-center">Laporan Pendapatan</h3>
     <h4 class="text-center">
         Tanggal {{ tanggal_indonesia($awal, false) }}
@@ -16,28 +50,27 @@
         Tanggal {{ tanggal_indonesia($akhir, false) }}
     </h4>
 
-    <table class="table table-striped">
+    <table>
         <thead>
-            <tr>
-                <th width="5%">No</th>
-                <th>Tanggal</th>
-                <th>Penjualan</th>
-                <th>Pembelian</th>
-                <th>Pengeluaran</th>
-                <th>Pendapatan</th>
-            </tr>
+        <tr>
+            <th>No</th>
+            <th>Tanggal</th>
+            <th>Penjualan</th>
+            <th>Pembelian</th>
+            <th>Pengeluaran</th>
+            <th>Pendapatan</th>
+        </tr>
         </thead>
         <tbody>
-            @foreach ($data as $row)
-                <tr>
-                    @foreach ($row as $col)
-                        <td>{{ $col }}</td>
-                    @endforeach
-                </tr>
-            @endforeach
+        @foreach ($data as $row)
+            <tr>
+                @foreach ($row as $col)
+                    <td>{{ $col }}</td>
+                @endforeach
+            </tr>
+        @endforeach
         </tbody>
     </table>
-
-    <script src="{{ asset('/AdminLTE-2/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+</div>
 </body>
 </html>
