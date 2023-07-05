@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 01 Jul 2023 pada 05.48
+-- Waktu pembuatan: 05 Jul 2023 pada 18.41
 -- Versi server: 10.4.13-MariaDB
 -- Versi PHP: 7.4.8
 
@@ -41,31 +41,31 @@ CREATE TABLE `aturan` (
 --
 
 INSERT INTO `aturan` (`id`, `kode_kerusakan`, `kode_gejala`, `solusi`, `created_at`, `updated_at`) VALUES
-(1, 'K001', 'G001,G002,G003', 'Lakukan pengecekan pada aki, coba untuk di charger jika voltase kurang dari 12V, atau ganti dengan aki baru dan pastikan menggunakan produk original.', NULL, '2023-06-27 08:58:43'),
-(2, 'K002', 'G003,G004,G005', 'Cek kondisi busi, jika sudah kotor dan celah busi longgar, segera ganti dengan busi yang baru.', NULL, NULL),
-(3, 'K002', 'G003,G004,G005,G006', 'Cek kondisi busi, jika sudah kotor dan celah busi longgar, segera ganti dengan busi yang baru.', '2023-06-27 21:43:44', '2023-06-27 21:43:44'),
-(4, 'K002', 'G003,G004,G005,G006,G007', 'Cek kondisi busi, jika sudah kotor dan celah busi longgar, segera ganti dengan busi yang baru.', '2023-06-28 22:37:27', '2023-06-28 22:37:27'),
-(5, 'K002', 'G003,G004,G005,G006,G007,G009', 'Cek kondisi busi, jika sudah kotor dan celah busi longgar, segera ganti dengan busi yang baru.', '2023-06-28 22:37:58', '2023-06-28 22:37:58'),
-(6, 'K003', 'G003,G004', 'Silahkan bersikan karburator dan stel ulang dengan perhitungan yang sesuai.', '2023-06-28 22:39:00', '2023-06-28 22:39:00'),
-(7, 'K003', 'G003,G004,G007', 'Silahkan bersikan karburator dan stel ulang dengan perhitungan yang sesuai.', '2023-06-28 22:39:22', '2023-06-28 22:39:22'),
-(8, 'K003', 'G003,G004,G007,G009', 'Silahkan bersikan karburator dan stel ulang dengan perhitungan yang sesuai.', '2023-06-28 22:39:39', '2023-06-28 22:39:39'),
-(9, 'K004', 'G008,G010', 'Ganti ring piston.', '2023-06-28 22:40:13', '2023-06-28 22:40:13'),
-(10, 'K004', 'G008,G010,G009', 'Ganti ring piston.', '2023-06-28 22:40:37', '2023-06-28 22:40:37'),
-(11, 'K005', 'G014,G009', 'Bersihkan piston, jika sudah tidak bisa digunakan maka segera diganti.', '2023-06-28 22:41:26', '2023-06-28 22:41:26'),
-(12, 'K005', 'G014,0009,G011', 'Bersihkan piston, jika sudah tidak bisa digunakan maka segera diganti.', '2023-06-28 22:41:45', '2023-06-28 22:41:45'),
-(13, 'K005', 'G014,0009,G011,G012,G013', 'Bersihkan piston, jika sudah tidak bisa digunakan maka segera diganti.', '2023-06-28 22:42:29', '2023-06-28 22:42:29'),
-(14, 'K005', 'G009,G011,G012,G014,G013', 'Bersihkan piston, jika sudah tidak bisa digunakan maka segera diganti.', '2023-06-28 22:42:48', '2023-06-28 22:42:48'),
-(15, 'K006', 'G011', 'Tambahkan oli, atau dianjurkan untuk ganti oli sesuai dengan aturan standart yaitu per 2000 km', '2023-06-28 22:44:33', '2023-06-28 22:44:33'),
-(16, 'K006', 'G011,G012', 'Tambahkan oli, atau dianjurkan untuk ganti oli sesuai dengan aturan standart yaitu per 2000 km', '2023-06-28 22:45:00', '2023-06-28 22:45:05'),
-(18, 'K007', 'G003,G005,G013', 'Lakukan pengecekan pada bagian head aoakah klep sudah aus atau blok head yang bermasalah.', '2023-06-28 22:48:01', '2023-06-28 22:48:01'),
-(20, 'K007', 'G003,G005,G013,G023', 'Lakukan pengecekan pada bagian head aoakah klep sudah aus atau blok head yang bermasalah.', '2023-06-28 22:48:46', '2023-06-28 22:48:46'),
-(21, 'K008', 'G010,G014', 'Segera ganti packing mesin yang bocor untuk mengatasi kebocoran oli.', '2023-06-28 22:49:35', '2023-06-28 22:49:35'),
-(22, 'K009', 'G020, G017,G016', 'Stel ulang komstir atau ganti dengan yang baru, dianjurkan menggunakan komstir racing atau bambu agar lebih awet.', '2023-06-28 22:50:10', '2023-06-28 22:51:32'),
-(23, 'K009', 'G020, G017', 'Stel ulang komstir atau ganti dengan yang baru, dianjurkan menggunakan komstir racing atau bambu agar lebih awet.', '2023-06-28 22:51:21', '2023-06-28 22:51:21'),
-(24, 'K010', 'G018', 'Ganti seal shock.', '2023-06-28 22:52:20', '2023-06-28 22:52:20'),
-(25, 'K011', 'G018,G019', 'Periksa takaran oli dan ganti oli shock dengan oli baru, dan pastikan takaran oli pas.', '2023-06-28 22:52:56', '2023-06-28 22:52:56'),
-(26, 'K012', 'G020,G021', 'Ganti bearing roda dengan yang baru.', '2023-06-28 22:53:34', '2023-06-28 22:53:34'),
-(27, 'K012', 'G020,G021,G022', 'Ganti bearing roda dengan yang baru.', '2023-06-28 22:54:00', '2023-06-28 22:54:00');
+(1, 'K001', '1,2,3', 'Lakukan pengecekan pada aki, coba untuk di charger jika voltase kurang dari 12V, atau ganti dengan aki baru dan pastikan menggunakan produk original.', NULL, '2023-06-27 08:58:43'),
+(2, 'K002', '3,4,5', 'Cek kondisi busi, jika sudah kotor dan celah busi longgar, segera ganti dengan busi yang baru.', NULL, NULL),
+(3, 'K002', '3,4,5,6', 'Cek kondisi busi, jika sudah kotor dan celah busi longgar, segera ganti dengan busi yang baru.', '2023-06-27 21:43:44', '2023-06-27 21:43:44'),
+(4, 'K002', '3,4,5,6,7', 'Cek kondisi busi, jika sudah kotor dan celah busi longgar, segera ganti dengan busi yang baru.', '2023-06-28 22:37:27', '2023-06-28 22:37:27'),
+(5, 'K002', '3,4,5,6,7,9', 'Cek kondisi busi, jika sudah kotor dan celah busi longgar, segera ganti dengan busi yang baru.', '2023-06-28 22:37:58', '2023-06-28 22:37:58'),
+(6, 'K003', '3,4', 'Silahkan bersikan karburator dan stel ulang dengan perhitungan yang sesuai.', '2023-06-28 22:39:00', '2023-07-03 08:35:11'),
+(7, 'K003', '3,4,7', 'Silahkan bersikan karburator dan stel ulang dengan perhitungan yang sesuai.', '2023-06-28 22:39:22', '2023-07-03 08:35:18'),
+(8, 'K003', '3,4,7,9', 'Silahkan bersikan karburator dan stel ulang dengan perhitungan yang sesuai.', '2023-06-28 22:39:39', '2023-07-03 08:35:26'),
+(9, 'K004', '8,10', 'Ganti ring piston.', '2023-06-28 22:40:13', '2023-07-03 08:35:36'),
+(10, 'K004', '8,10,9', 'Ganti ring piston.', '2023-06-28 22:40:37', '2023-07-03 08:35:46'),
+(11, 'K005', '14,9', 'Bersihkan piston, jika sudah tidak bisa digunakan maka segera diganti.', '2023-06-28 22:41:26', '2023-07-03 08:35:57'),
+(12, 'K005', '14,9,11', 'Bersihkan piston, jika sudah tidak bisa digunakan maka segera diganti.', '2023-06-28 22:41:45', '2023-07-03 08:36:12'),
+(13, 'K005', '14,9,11,13,14', 'Bersihkan piston, jika sudah tidak bisa digunakan maka segera diganti.', '2023-06-28 22:42:29', '2023-07-03 08:36:25'),
+(14, 'K005', '9,11,12,14,13', 'Bersihkan piston, jika sudah tidak bisa digunakan maka segera diganti.', '2023-06-28 22:42:48', '2023-07-03 08:36:38'),
+(15, 'K006', '11', 'Tambahkan oli, atau dianjurkan untuk ganti oli sesuai dengan aturan standart yaitu per 2000 km', '2023-06-28 22:44:33', '2023-07-03 08:36:44'),
+(16, 'K006', '11,12', 'Tambahkan oli, atau dianjurkan untuk ganti oli sesuai dengan aturan standart yaitu per 2000 km', '2023-06-28 22:45:00', '2023-07-03 08:36:57'),
+(18, 'K007', '3,5,13', 'Lakukan pengecekan pada bagian head aoakah klep sudah aus atau blok head yang bermasalah.', '2023-06-28 22:48:01', '2023-07-03 08:37:04'),
+(20, 'K007', '3,5,13,23', 'Lakukan pengecekan pada bagian head aoakah klep sudah aus atau blok head yang bermasalah.', '2023-06-28 22:48:46', '2023-07-03 08:37:16'),
+(21, 'K008', '10,14', 'Segera ganti packing mesin yang bocor untuk mengatasi kebocoran oli.', '2023-06-28 22:49:35', '2023-07-03 08:37:35'),
+(22, 'K009', '20,17,16', 'Stel ulang komstir atau ganti dengan yang baru, dianjurkan menggunakan komstir racing atau bambu agar lebih awet.', '2023-06-28 22:50:10', '2023-07-03 08:37:46'),
+(23, 'K009', '20,17', 'Stel ulang komstir atau ganti dengan yang baru, dianjurkan menggunakan komstir racing atau bambu agar lebih awet.', '2023-06-28 22:51:21', '2023-07-03 08:37:53'),
+(24, 'K010', '18', 'Ganti seal shock.', '2023-06-28 22:52:20', '2023-07-03 08:37:59'),
+(25, 'K011', '18,19', 'Periksa takaran oli dan ganti oli shock dengan oli baru, dan pastikan takaran oli pas.', '2023-06-28 22:52:56', '2023-07-03 08:38:06'),
+(26, 'K012', '20,21', 'Ganti bearing roda dengan yang baru.', '2023-06-28 22:53:34', '2023-07-03 08:38:11'),
+(27, 'K012', '20,21,22', 'Ganti bearing roda dengan yang baru.', '2023-06-28 22:54:00', '2023-07-03 08:38:18');
 
 -- --------------------------------------------------------
 
@@ -116,13 +116,8 @@ CREATE TABLE `diagnosa` (
 --
 
 INSERT INTO `diagnosa` (`id`, `motor`, `gejala`, `tgl_konsultasi`, `user_id`) VALUES
-(35, 'mio', '1,6,7,15,16,17', '2023-06-17', 4),
-(144, 'MEGAPRO', '1', '2023-06-29', 4),
-(145, 'zxc', '\",1,1,1\"', '2023-06-29', 4),
-(146, 'zxcv', '\",G001\"', '2023-06-29', 4),
-(147, 'zxcvb', '\",G001\"', '2023-06-29', 4),
-(148, 'as', '\"1,G002\"', '2023-06-29', 4),
-(149, 'asd', 'G001', '2023-06-29', 4);
+(172, 'mio', '1', '2023-07-05', 4),
+(173, 'MEGAPRO', '1,2,3', '2023-07-05', 4);
 
 -- --------------------------------------------------------
 
@@ -179,7 +174,7 @@ INSERT INTO `gejala` (`id`, `kode_gejala`, `pertanyaan`, `is_first`, `created_at
 (4, 'G004', 'Apakah mesin motor terasa brebet/tidak langsam?', 0, '2023-06-25 17:24:07', '2023-06-25 17:24:07'),
 (5, 'G005', 'Apakah bensin terasa boros?', 0, '2023-06-25 17:24:07', '2023-06-25 17:24:07'),
 (6, 'G006', 'Apakah terjadi ledakan di mesin setelah tarikan rpm tinggi?', 0, '2023-06-25 17:24:07', '2023-06-25 17:24:07'),
-(7, 'G007', 'Apakah motor susah dihidupkan ketika kondisi mesin...', 0, '2023-06-25 17:24:07', '2023-06-25 17:24:07'),
+(7, 'G007', 'Apakah motor susah dihidupkan ketika kondisi mesin dingin?', 0, '2023-07-03 15:44:54', '2023-07-03 08:44:54'),
 (8, 'G008', 'Apakah keluar asap putih dari knalpot?', 0, '2023-06-25 17:24:07', '2023-06-25 17:24:07'),
 (9, 'G009', 'Apakah motor kurang bertenaga?', 0, '2023-06-25 17:24:07', '2023-06-25 17:24:07'),
 (10, 'G010', 'Apakah oli cepat habis/berkurang?', 0, '2023-06-25 17:24:07', '2023-06-25 17:24:07'),
@@ -251,19 +246,6 @@ INSERT INTO `kerusakan` (`id`, `kode_kerusakan`, `nama`, `created_at`, `updated_
 (10, 'K010', 'seal shock bocor', '2023-06-25 18:01:01', '2023-06-25 18:01:01'),
 (11, 'K011', 'seal shock bermasalah dan takaran oli shock tidak pas', '2023-06-25 18:01:01', '2023-06-25 18:01:01'),
 (12, 'K012', 'bearing roda rusak', '2023-06-25 18:01:01', '2023-06-25 18:01:01');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `kerusakan_motor`
---
-
-CREATE TABLE `kerusakan_motor` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `pernyataan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -346,11 +328,7 @@ CREATE TABLE `pembelian` (
 --
 
 INSERT INTO `pembelian` (`id_pembelian`, `id_supplier`, `total_item`, `total_harga`, `diskon`, `bayar`, `created_at`, `updated_at`) VALUES
-(1, 1, 0, 0, 0, 0, '2023-06-13 10:11:20', '2023-06-13 10:11:20'),
-(2, 1, 1, 60000, 0, 60000, '2023-06-13 10:29:33', '2023-06-13 10:29:45'),
-(3, 1, 0, 0, 0, 0, '2023-06-19 19:56:05', '2023-06-19 19:56:05'),
-(4, 3, 0, 0, 0, 0, '2023-06-20 07:23:02', '2023-06-20 07:23:02'),
-(5, 3, 0, 0, 0, 0, '2023-06-30 00:41:52', '2023-06-30 00:41:52');
+(6, 5, 10, 700000, 0, 700000, '2023-07-05 09:07:55', '2023-07-05 09:08:14');
 
 -- --------------------------------------------------------
 
@@ -374,7 +352,7 @@ CREATE TABLE `pembelian_detail` (
 --
 
 INSERT INTO `pembelian_detail` (`id_pembelian_detail`, `id_pembelian`, `id_produk`, `harga_beli`, `jumlah`, `subtotal`, `created_at`, `updated_at`) VALUES
-(1, 2, 8, 60000, 1, 60000, '2023-06-13 10:29:39', '2023-06-13 10:29:39');
+(3, 6, 11, 70000, 10, 700000, '2023-07-05 09:08:01', '2023-07-05 09:08:11');
 
 -- --------------------------------------------------------
 
@@ -431,7 +409,8 @@ INSERT INTO `penjualan` (`id_penjualan`, `total_item`, `total_harga`, `diskon`, 
 (21, 1, 75000, 0, 75000, 0, 1, '2023-06-19 10:13:32', '2023-06-19 10:13:44'),
 (24, 1, 40000, 0, 40000, 100000, 1, '2023-06-20 21:11:33', '2023-06-20 21:11:51'),
 (40, 6, 240000, 0, 240000, 300000, 1, '2023-06-30 09:05:29', '2023-06-30 09:06:29'),
-(41, 7, 280000, 0, 280000, 300000, 1, '2023-06-30 19:26:32', '2023-06-30 19:28:52');
+(41, 7, 280000, 0, 280000, 300000, 1, '2023-06-30 19:26:32', '2023-06-30 19:28:52'),
+(42, 0, 0, 0, 0, 0, 1, '2023-07-05 09:08:55', '2023-07-05 09:08:55');
 
 -- --------------------------------------------------------
 
@@ -514,7 +493,7 @@ CREATE TABLE `produk` (
 
 INSERT INTO `produk` (`id_produk`, `id_kategori`, `kode_produk`, `nama_produk`, `merk`, `harga_beli`, `diskon`, `harga_jual`, `stok`, `created_at`, `updated_at`) VALUES
 (10, 29, 'P000010', 'Lampu Sein LED1', 'local', 35000, 0, 40000, 6, '2023-06-19 09:16:51', '2023-06-30 19:28:52'),
-(11, 30, 'P000011', 'OLI', 'SPX', 70000, 0, 75000, 30, '2023-06-20 01:05:42', '2023-06-27 22:10:51');
+(11, 30, 'P000011', 'OLI', 'SPX', 70000, 0, 75000, 40, '2023-06-20 01:05:42', '2023-07-05 09:08:14');
 
 -- --------------------------------------------------------
 
@@ -551,7 +530,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('abraViSZK2NFmpBgehnt8FSzcCTvkA5Bg15iPbkn', 4, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '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', 1688180455);
+('HT1GrPuMMFpzYh4Aa3uUmDXoGeMWDh7o8K8RJ53c', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', 'YTo4OntzOjY6Il90b2tlbiI7czo0MDoiTzBNV202eTlkTlhFWDVyNHExdmFaWjk2dFZwMXZRY3NRbloyQ3BYMyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTU6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMS9sYXBvcmFuL3BkZi8yMDIzLTA3LTAxLzIwMjMtMDctMDUiO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MTc6InBhc3N3b3JkX2hhc2hfd2ViIjtzOjYwOiIkMnkkMTAkR3pML3R1VGFSemhTNzUzWXJ0MWc2T2VaRXlXODUvWFRnRkxxZVNtVHF0TUZ3cHQxaFEwLkciO3M6MTI6ImlkX3BlbWJlbGlhbiI7aTo2O3M6MTE6ImlkX3N1cHBsaWVyIjtzOjE6IjUiO3M6MTI6ImlkX3Blbmp1YWxhbiI7aTo0Mjt9', 1688575126);
 
 -- --------------------------------------------------------
 
@@ -690,12 +669,6 @@ ALTER TABLE `kerusakan`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
--- Indeks untuk tabel `kerusakan_motor`
---
-ALTER TABLE `kerusakan_motor`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indeks untuk tabel `migrations`
 --
 ALTER TABLE `migrations`
@@ -808,7 +781,7 @@ ALTER TABLE `booking`
 -- AUTO_INCREMENT untuk tabel `diagnosa`
 --
 ALTER TABLE `diagnosa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=150;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=174;
 
 --
 -- AUTO_INCREMENT untuk tabel `failed_jobs`
@@ -841,12 +814,6 @@ ALTER TABLE `kerusakan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT untuk tabel `kerusakan_motor`
---
-ALTER TABLE `kerusakan_motor`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT untuk tabel `migrations`
 --
 ALTER TABLE `migrations`
@@ -856,13 +823,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT untuk tabel `pembelian`
 --
 ALTER TABLE `pembelian`
-  MODIFY `id_pembelian` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_pembelian` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `pembelian_detail`
 --
 ALTER TABLE `pembelian_detail`
-  MODIFY `id_pembelian_detail` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_pembelian_detail` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `pengeluaran`
@@ -874,7 +841,7 @@ ALTER TABLE `pengeluaran`
 -- AUTO_INCREMENT untuk tabel `penjualan`
 --
 ALTER TABLE `penjualan`
-  MODIFY `id_penjualan` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id_penjualan` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT untuk tabel `penjualan_detail`
