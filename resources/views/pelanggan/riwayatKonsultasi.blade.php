@@ -24,7 +24,7 @@
                             <th>No</th>
                             <th>Motor</th>
                             <th>Tanggal Konsultasi</th>
-                            <th>Gejala dan Hasil Konsultasi</th>
+                            <th>Detail</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -34,7 +34,7 @@
                                 <td>{{ $item->motor }}</td>
                                 <td>{{ $item->tgl_konsultasi }}</td>
                                 <td>
-                                    <a href="{{ route('diagnosa.result', ['id' => $item->user_id]) }}" class="btn btn-warning btn-sm">
+                                    <a href="{{ route('diagnosa.result', ['id' => $item->id]) }}" class="btn btn-warning btn-sm">
                                         <i class="fa fa-eye"></i>
                                     </a>
                                 </td>

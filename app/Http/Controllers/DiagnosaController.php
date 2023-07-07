@@ -49,10 +49,7 @@ class DiagnosaController extends Controller
         $data = Gejala::where('is_first', true)->first();
         
         $data["diagnosaId"] = $id;
-        $data['pertanyaanId'] = 'G001';
-
-        // return $data;
-        
+        $data['pertanyaanId'] = 'G001';        
         return view('diagnosa/question', compact("data"));
     }
     
@@ -63,8 +60,6 @@ class DiagnosaController extends Controller
         // Simpan jawaban kode gejala ke dalam kolom "gejala" pada tabel "diagnosa"
         if ($isTrue > 0) {
             $diagnosa->upsertGejala($id, $pertanyaanId);
-            // return
-            // $nextGejala = $diagnosa->getNextGejala();
             
             $nextQuestion = $pertanyaanId + 1;
             $data = Gejala::where('id', $nextQuestion)->first();
@@ -73,19 +68,11 @@ class DiagnosaController extends Controller
             if ($data) {
                 $data['diagnosaId'] = $id;
                 $data['pertanyaanId'] = $data->id;
-                // $data['isTrue'] = $isTrue;
                 return view('diagnosa.question', compact("data"));
                 # code...
             } else {
                 return redirect()->route('diagnosa.result', ['id' => $id])->with(['success' => 'Result berhasil disimpan!']);
             }
-
-
-            // return redirect()->route('diagnosa.question', [
-            //     'id' => $id,
-            //     'pertanyaanId' => $nextGejala->kode_gejala,
-            //     'isTrue' => $isTrue
-            // ]);
   
         } else {
             $nextQuestion = $pertanyaanId + 1;
@@ -101,25 +88,12 @@ class DiagnosaController extends Controller
                 return redirect()->route('diagnosa.result', ['id' => $id])->with(['success' => 'Result berhasil disimpan!']);
             }
         }
-    
-       // Periksa apakah masih ada pertanyaan berikutnya
-       
-        // if ($nextGejala) {
-        //     // Lanjutkan ke pertanyaan berikutnya
-        //     return redirect()->route('diagnosa.question', [
-        //         'id' => $id,
-        //         'pertanyaanId' => $nextGejala->id,
-        //         'isTrue' => $isTrue
-        //     ]);
-        // } else {
-        //     // Tampilkan halaman hasil diagnosa
-        //     return redirect()->route('diagnosa.result', ['id' => $id]);
-        // }
     }
        
 
     public function result($id)
     {
+
         $aturan = Aturan::select('kode_gejala')->get();
         $cariArray = [];
         
@@ -145,6 +119,10 @@ class DiagnosaController extends Controller
         
 
         // $data = (new Diagnosa)->getResultDiagnosa($id);
+
+        $data = (new Diagnosa)->getResultDiagnosa($id);
+        return view('diagnosa/result', compact("data"));
+
     }
 
     public function search()

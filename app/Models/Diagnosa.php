@@ -12,6 +12,7 @@ class Diagnosa extends Model
     protected $fillable = ['motor', 'gejala', 'tgl_konsultasi', 'user_id'];
     public $timestamps = false;
 
+
     // public function gejala()
     // {
     //     return $this->hasMany(Gejala::class, 'gejala', 'id');
@@ -64,34 +65,5 @@ class Diagnosa extends Model
             $this->gejala = $hasil;
             $this->save();
         }
-
-        // $this->gejala = implode(",", $gejala);
-        
-        // Cek apakah pertanyaan sudah dijawab sebelumnya
-        // if (!in_array($this->id, $gejala)) {
-        //     // Tambahkan pertanyaan ke dalam gejala
-        //     $gejala[] = $this->id;
-        //     $this->gejala = $gejala
-        //     $this->setAttribute('gejala', implode(",", $gejala));
-        //     $this->save();
-        // }
-        // Explode gejala dalam table diagnosa dari separated comma ke array
-    
-       // Ambil pertanyaan berikutnya
-        // $nextGejala = Gejala::whereNotIn('kode_gejala', [$gejala])->first();
-
-        // return $nextGejala;
-        // return true;
     }
-
-    // public function getNextGejala()
-    // {
-    //    // Explode gejala dalam table diagnosa dari separated comma ke array
-    //     $gejala = explode(",", $this->gejala);;
-
-    //    // Ambil pertanyaan berikutnya
-    //     $nextGejala = Gejala::whereNotIn('kode_gejala', $gejala)->first();
-
-    //     return $nextGejala;
-    // }
 }

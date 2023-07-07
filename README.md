@@ -1,6 +1,4 @@
-aku abis nambahin crud di kerusakan dan gejala, yang gejala dah OKE, yang kerusakan masih eror.. erornya sama kek dipembelian, trying object 'nama; not found.
-sistem pakar masih sama belum jalan.
-di menu sistem pakar yang belum ada tampilan crud aturan, nanti tak benerin dlu struktur tabelnya.
+sudah aman semua, tinggal sistem pakar
 
 akun :
 admin :
