@@ -93,8 +93,36 @@ class DiagnosaController extends Controller
 
     public function result($id)
     {
+
+        $aturan = Aturan::select('kode_gejala')->get();
+        $cariArray = [];
+        
+        foreach ($aturan as $row) {
+            $cari = $row->kode_gejala;
+        
+            $diagnosa = Diagnosa::where('id', $id)->where('gejala', 'LIKE', '%' . $cari . '%')->get();
+        
+            foreach ($diagnosa as $item) {
+                $cariArray[] = $cari;
+            }
+        }
+        
+        // Menampilkan nilai $cari yang sesuai
+        $arrayHasil = array_unique($cariArray);
+
+        if ($arrayHasil) {
+            $data['hasil'] = Aturan::whereIn('kode_gejala', $arrayHasil)->get();
+            return view('diagnosa/result', compact("data"));
+        } else {
+            return view('diagnosa/result-failed');
+        }
+        
+
+        // $data = (new Diagnosa)->getResultDiagnosa($id);
+
         $data = (new Diagnosa)->getResultDiagnosa($id);
         return view('diagnosa/result', compact("data"));
+
     }
 
     public function search()
