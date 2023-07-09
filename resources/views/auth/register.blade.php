@@ -1,12 +1,12 @@
-@extends('layouts.register')
+@extends('layouts.auth')
 
-@section('register')
-<div class="register-box">
+@section('login')
+<div class="login-box">
     <!-- /.login-logo -->
-    <div class="register-box-body">
-        <div class="register-logo">
+    <div class="login-box-body">
+        <div class="login-logo">
             <a href="{{ url('/') }}">
-                <img src="/img/logo-20230612141809.png" alt="logo.png" width="100">
+                <img src="{{ asset('img/logo-20230612141809.png') }}" alt="Logo" width="100">
             </a>
         </div>
 

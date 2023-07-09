@@ -36,31 +36,27 @@ HASIL KONSULTASI
 <!-- Default box -->
 <div class="container-fluid">
     <div class="box">
-        <div class="box-header with-border">
-            <h3 class="box-title">Hasil konsultasi</h3>
-        </div>
         <div class="box-body">
             <div class="row">
                 <div class="col-lg-12">
-
-                    @foreach($data['hasil'] as $value)
-                    <strong><i class="fa fa-pencil margin-r-5"></i> {{ $value->kerusakan->nama }}</strong> <br>
-                    @endforeach
-                    Solusi
-                    <ul>
-                        @foreach($data['hasil'] as $item)
-                        <li>{{ $item->solusi }}</li>
-                        @endforeach
-                    </ul>
-
-                    {{-- ada 2 tampilan, serah mau yg atas atau bawah --}}
-                    {{-- @foreach($data['hasil'] as $item)
-                    <strong><i class="fa fa-pencil margin-r-5"></i> {{ $item->kerusakan->nama }}</strong>
-                    <ul>
-                        <li>{{ $item->solusi }}</li>
-                    </ul>
-                    @endforeach --}}
-
+                    <div class="fade-in">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Kerusakan</th>
+                                    <th>Solusi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($data['hasil'] as $value)
+                                <tr>
+                                    <td>{{ $value->kerusakan->nama }}</td>
+                                    <td>{{ $value->solusi }}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
