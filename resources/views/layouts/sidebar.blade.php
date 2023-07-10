@@ -39,6 +39,11 @@
                     <i class="fa fa-truck"></i> <span>Supplier</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ url('/booking/pelanggan/status') }}">
+                    <i class="fa fa-cart-arrow-down"></i> <span>Status Booking Service</span>
+                </a>
+            </li>
             <li class="header">TRANSAKSI</li>
             <li>
                 <a href="{{ url('pengeluaran/') }}">

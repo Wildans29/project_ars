@@ -55,17 +55,17 @@ Route::group(['middleware' => 'auth'], function () {
         });
         
 
-        //ROUTE PRODUK
-        Route::prefix('produk')->name('produk.')->group(function () {
-            Route::get('/', [ProdukController::class, 'index'])->name('index');
-            Route::get('/data', [ProdukController::class, 'data'])->name('data');
-            Route::post('/store',[ProdukController::class, 'store'])->name('store');
-            Route::get('/edit/{id}', [ProdukController::class, 'edit'])->name('edit');
-            Route::post('/edit/{id}', [ProdukController::class, 'update']);
-            Route::delete('/destroy/{id}',[ProdukController::class, 'destroy'])->name('destroy');
-            Route::post('/delete-selected/', [ProdukController::class, 'deleteSelected'])->name('delete_selected');
-            Route::post('/cetak-barcode/', [ProdukController::class, 'cetakBarcode'])->name('cetak_barcode');
-        });
+//ROUTE PRODUK
+Route::prefix('produk')->name('produk.')->group(function () {
+    Route::get('/', [ProdukController::class, 'index'])->name('index');
+    Route::get('/data', [ProdukController::class, 'data'])->name('data');
+    Route::post('/store',[ProdukController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [ProdukController::class, 'edit'])->name('edit');
+    Route::post('/edit/{id}', [ProdukController::class, 'update']);
+    Route::delete('/destroy/{id}',[ProdukController::class, 'destroy'])->name('destroy');
+    Route::post('/delete-selected/', [ProdukController::class, 'deleteSelected'])->name('delete_selected');
+    Route::post('/cetak-barcode/', [ProdukController::class, 'cetakBarcode'])->name('cetak_barcode');
+});
         
         //ROUTE SUPPLIER
         Route::prefix('supplier')->name('supplier.')->group(function () {
@@ -190,6 +190,15 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/', [UserController::class, 'profil'])->name('profil');
             Route::post('/', [UserController::class, 'updateProfil'])->name('update_profil');
         });
+                //ROUTE BOOKING SERVICE
+                Route::prefix('booking')->name('booking.')->group(function () {
+                    Route::get('/', function () {return view('pelanggan.booking');})->name('index');
+                    Route::post('/submit', [BookingController::class, 'submit'])->name('submit');
+                    Route::get('/submit', [BookingController::class, 'submit'])->name('submit');
+                    Route::post('/{id}/service', [BookingController::class, 'markAsServiced'])->name('service');
+                    Route::get('/pelanggan/status', [BookingController::class, 'showStatus'])->name('status');
+                    Route::post('/pelanggan/booking/{id}', [BookingController::class, 'updateServiceStatus'])->name('status');
+                });
     });
 
     //ROUTE USER LEVEL 2 (PELANGGAN)

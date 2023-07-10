@@ -4,20 +4,12 @@
     Mulai Diagnosa
 @endsection
 
-@section('content')
-    <section class="content-header">
-        <h1>
-            Mulai Diagnosa
-        </h1>
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Diagnosa</a></li>
-            <li class="active">Start</li>
-        </ol>
-    </section>
+@section('breadcrumb')
+    @parent
+    <li class="active">Mulai Diagnosa</li>
+@endsection
 
-    <!-- Main content -->
-    <section class="content">
+@section('content')
         <!-- Default box -->
         <div class="box">
             <div class="box-header"></div>

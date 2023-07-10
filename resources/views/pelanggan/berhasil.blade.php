@@ -14,8 +14,8 @@
    
     <div class="ticket">
         @if(session()->has('booking'))
-        <h3 class="ticket-title">Booking Service Berhasil</h3>
-        <p class="ticket-text">Terima kasih, booking service Anda telah berhasil.</p>
+        <h3 class="ticket-title">Booking Service Berhasil!!!</h3>
+        <p class="ticket-text">Terima kasih, booking service anda telah berhasil.</p>
         <div class="ticket-details">
             <div class="ticket-info">
                 <span class="ticket-label">Nama:</span>
@@ -53,6 +53,7 @@
                 <span class="ticket-label">Kode Booking:</span>
                 <span class="ticket-value">{{ session()->get('booking')->kode_booking }}</span>
             </div>
+            <p>Status booking anda bisa diakses di halaman Riwayat Booking</p>
         </div>
         @endif
     </div>

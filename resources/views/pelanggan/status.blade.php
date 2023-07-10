@@ -37,7 +37,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($booking as $book)
-                                    @if ($book->user_id == auth()->user()->id) {{-- Memeriksa apakah booking ini milik pengguna yang sedang login --}}
+                                    @if (auth()->user()->level == 1 || (auth()->user()->level == 2 && $book->user_id == auth()->user()->id))
                                         <tr>
                                             <td>{{ $book->kode_booking }}</td>
                                             <td>{{ $book->nama }}</td>
@@ -61,7 +61,6 @@
                                                     @csrf
                                                     <button type="submit" class="btn btn-success">Sudah Service</button>
                                                 </form>
-                                                
                                                 @endif
                                             </td>
                                         </tr>
