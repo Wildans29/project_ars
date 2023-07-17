@@ -2,7 +2,6 @@
 
 @section('login')
 <div class="login-box">
-
     <!-- /.login-logo -->
     <div class="login-box-body">
         <div class="login-logo">
@@ -45,7 +44,11 @@
                 </div>
                 <!-- /.col -->
             </div>
+            <br>
             <div class="form-group row">
+                    <div class="col-md-6 offset-md-4">
+                        <a href="{{ route('password.request') }}">Lupa password?</a>
+                    </div>
                 <div class="col-md-6 offset-md-4">
                     <a href="{{ route('register') }}">Belum memiliki akun? Daftar di sini</a>
                 </div>

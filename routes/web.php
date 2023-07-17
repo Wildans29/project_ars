@@ -21,6 +21,13 @@ use App\Http\Controllers\{
     AturanController
 };
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
+
+Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -38,8 +45,8 @@ Route::put('/update/{id}', [UserController::class, 'update']);
 Route::delete('/destroy/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::group(['middleware' => 'level:1'], function () {
 
@@ -48,7 +55,6 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/', [KategoriController::class, 'index'])->name('index');
             Route::get('/data', [KategoriController::class, 'data'])->name('data');
             Route::post('/store', [KategoriController::class, 'store'])->name('store');
-            //ubah update mejadi edit dengan berbeda action post dan get. get(edit) untuk menampilkan data, post(edit) untuk mengirim data. function di controller ttp harus beda ya wil
             Route::get('/edit/{id}', [KategoriController::class, 'edit'])->name('edit');
             Route::post('/edit/{id}', [KategoriController::class, 'update']);
             Route::delete('/destroy/{id}', [KategoriController::class, 'destroy'])->name('destroy');
@@ -157,7 +163,7 @@ Route::prefix('produk')->name('produk.')->group(function () {
                 Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
                 Route::get('/laporan/data/{awal}/{akhir}', [LaporanController::class, 'data'])->name('laporan.data');
                 Route::get('/laporan/pdf/{awal}/{akhir}', [LaporanController::class, 'exportPDF']);
-                // Route::get('/laporan/pdf/{awal}/{akhir}', [LaporanController::class, 'exportPDF'])->name('laporan.export_pdf');
+
         
                 Route::get('/user/data', [UserController::class, 'data'])->name('user.data');
                 Route::resource('/user', UserController::class);
@@ -190,19 +196,10 @@ Route::prefix('produk')->name('produk.')->group(function () {
             Route::get('/', [UserController::class, 'profil'])->name('profil');
             Route::post('/', [UserController::class, 'updateProfil'])->name('update_profil');
         });
-                //ROUTE BOOKING SERVICE
-                Route::prefix('booking')->name('booking.')->group(function () {
-                    Route::get('/', function () {return view('pelanggan.booking');})->name('index');
-                    Route::post('/submit', [BookingController::class, 'submit'])->name('submit');
-                    Route::get('/submit', [BookingController::class, 'submit'])->name('submit');
-                    Route::post('/{id}/service', [BookingController::class, 'markAsServiced'])->name('service');
-                    Route::get('/pelanggan/status', [BookingController::class, 'showStatus'])->name('status');
-                    Route::post('/pelanggan/booking/{id}', [BookingController::class, 'updateServiceStatus'])->name('status');
-                });
     });
 
     //ROUTE USER LEVEL 2 (PELANGGAN)
-    Route::group(['middleware' => 'level:2'], function () {
+    Route::group(['middleware' => 'level:1,2'], function () {
 
         //ROUTE BOOKING SERVICE
         Route::prefix('booking')->name('booking.')->group(function () {

@@ -40,7 +40,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{ url('/booking/pelanggan/status') }}">
+                <a href="{{ url('booking/pelanggan/status/') }}">
                     <i class="fa fa-cart-arrow-down"></i> <span>Status Booking Service</span>
                 </a>
             </li>
